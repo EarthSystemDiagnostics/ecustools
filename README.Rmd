@@ -1,6 +1,6 @@
 ---
-title: "ecustools"
-output: md_document
+title: ecustools
+output: github_document
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -13,7 +13,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-# ecustools
 
 A miscellaneous collection of R functions used in the ECUS group for working with time-series and paleo data. 
 
