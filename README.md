@@ -1,7 +1,6 @@
 ecustools
 ================
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
 A miscellaneous collection of R functions used in the ECUS group for working with time-series and paleo data.
 
 Many of these functions have been ported from the 'paleoLibrary' collection of R scripts.
