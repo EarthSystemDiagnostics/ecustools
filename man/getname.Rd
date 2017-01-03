@@ -15,4 +15,7 @@ character
 \description{
 returns the "name" attribute of a pTs/pField object
 }
+\author{
+Thomas Laepple
+}
 

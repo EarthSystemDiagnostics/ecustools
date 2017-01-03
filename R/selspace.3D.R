@@ -15,7 +15,7 @@
 #'
 #' @return \code{\link{pTs}} object
 #' @export
-#'
+#' @author Thomas Laepple
 #' @examples
 selspace.3D <- function(data, lat1, lon1, SBOX = 5, tolLon = 10, bNN = FALSE, timeindexNA = 1) {
   choice.lat <- lat1

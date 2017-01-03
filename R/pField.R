@@ -15,6 +15,7 @@
 #' @return a pField object
 #' @export
 #'
+#' @author Thomas Laepple
 #' @examples
 pField <-
   function(data,

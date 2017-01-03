@@ -30,4 +30,7 @@ pTs objects are enhanced time-series \code{\link[stats]{ts}} objects. \code{pTs(
   vector/time series vectors (having the same time basis) and assigns the
   class "pTs" to the resulting object
 }
+\author{
+Thomas Laepple
+}
 

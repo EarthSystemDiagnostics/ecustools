@@ -6,7 +6,7 @@
 #'
 #' @return character
 #' @export
-#'
+#' @author Thomas Laepple
 #' @examples
 getname <- function(data){return(attr(data, "name"))}
 
@@ -20,6 +20,7 @@ getname <- function(data){return(attr(data, "name"))}
 #' @family history
 #'
 #' @return character
+#' @author Thomas Laepple
 #' @examples
 gethistory <- function(data) {
   return(attr(data, "history"))
@@ -37,7 +38,7 @@ gethistory <- function(data) {
 #'
 #' @return a pTs or pField object
 #' @export
-#'
+#' @author Thomas Laepple
 #' @examples
 addhistory <- function(x, newhist){
   newhist <- paste(date(), newhist)

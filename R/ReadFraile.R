@@ -7,7 +7,7 @@
 #'
 #' @return a \code{\link{pField}} object
 #' @export
-#'
+#' @author Thomas Laepple
 #' @examples
 ReadFraile <- function(FILENAME, varname){
 

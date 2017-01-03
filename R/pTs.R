@@ -15,6 +15,7 @@
 #' @return pTs object
 #' @export
 #'
+#' @author Thomas Laepple
 #' @examples
 pTs <- function(data,
                 time,

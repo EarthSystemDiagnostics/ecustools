@@ -31,4 +31,7 @@ Function to interpolate a field to a given point specified by
   latitude and longitude. It uses the nearest neighbour if the adjancents
   points are missing, if not it uses bilinear interpolation
 }
+\author{
+Thomas Laepple
+}
 

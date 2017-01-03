@@ -31,4 +31,7 @@ adds attributes such as longitudes and latitudes to a gridded
   stand in general for longitude, latitude and time) and assigns the class
   "pField" to the resulting object
 }
+\author{
+Thomas Laepple
+}
 

@@ -18,4 +18,7 @@ a \code{\link{pField}} object
 Reads the biogeochemical dataset from Igaraza Faile, Monthly data varname
 e.g. bulloides or ruber... to get the list, leave it empty
 }
+\author{
+Thomas Laepple
+}
 

@@ -17,6 +17,9 @@ a pTs or pField object
 \description{
 adds a history (e.g., a comment) to a pTs or a pField object
 }
+\author{
+Thomas Laepple
+}
 \seealso{
 Other history: \code{\link{gethistory}}
 }
