@@ -10,7 +10,8 @@
 #' @description adds attributes such as longitudes and latitudes to a gridded
 #'   data array (which in most cases is three-dimensional and where the dimensions
 #'   stand in general for longitude, latitude and time) and assigns the class
-#'   "pField" to the resulting object
+#'   "pField" to the resulting object.
+#' @source Function copied from "proxytype.R" in paleolibary/src/
 #'
 #' @return a pField object
 #' @export

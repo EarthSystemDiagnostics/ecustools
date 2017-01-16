@@ -3,6 +3,9 @@
 \name{pField}
 \alias{pField}
 \title{pField}
+\source{
+Function copied from "proxytype.R" in paleolibary/src/
+}
 \usage{
 pField(data, time, lat = 0, lon = 0, name = " ", history = " ",
   date = TRUE)
@@ -29,7 +32,7 @@ a pField object
 adds attributes such as longitudes and latitudes to a gridded
   data array (which in most cases is three-dimensional and where the dimensions
   stand in general for longitude, latitude and time) and assigns the class
-  "pField" to the resulting object
+  "pField" to the resulting object.
 }
 \author{
 Thomas Laepple

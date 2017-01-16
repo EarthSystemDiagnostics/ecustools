@@ -3,6 +3,9 @@
 \name{pTs}
 \alias{pTs}
 \title{Create a pTs object}
+\source{
+Function copied from "proxytype.R" in paleolibary/src/
+}
 \usage{
 pTs(data, time, lat = 0, lon = 0, name = "", history = "",
   date = TRUE)

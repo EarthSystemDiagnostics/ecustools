@@ -6,7 +6,10 @@
 #' @param varname character, the variable to be read
 #'
 #' @return a \code{\link{pField}} object
-#' @export
+#' @export read_fraile ReadFraile
+#' @aliases read_fraile ReadFraile
+#' @source copied from paleolibrary/src/single_functions/speclib/read.fraile.R
+#' and updated to use \code{ncdf4}
 #' @author Thomas Laepple
 #' @examples
 ReadFraile <- function(FILENAME, varname){
@@ -36,4 +39,9 @@ ReadFraile <- function(FILENAME, varname){
 
   return(pField(temp.data, temp.time, lat = temp.lat, lon = temp.lon,
                 name = varname, history = FILENAME))
+}
+read_fraile <- function(...){
+  warning("read_fraile is deprecated and replaced with ReadFraile
+          to comply with ECUS R style guide")
+  ReadFraile(...)
 }

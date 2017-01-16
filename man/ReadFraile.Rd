@@ -2,7 +2,12 @@
 % Please edit documentation in R/ReadFraile.R
 \name{ReadFraile}
 \alias{ReadFraile}
+\alias{read_fraile}
 \title{ReadFraile}
+\source{
+copied from paleolibrary/src/single_functions/speclib/read.fraile.R
+and updated to use \code{ncdf4}
+}
 \usage{
 ReadFraile(FILENAME, varname)
 }

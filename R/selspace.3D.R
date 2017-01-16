@@ -1,4 +1,4 @@
-#' selspace.3D
+#' SelSpace3D
 #'
 #' @param data pField object
 #' @param lat1 vector length 1
@@ -14,10 +14,11 @@
 #'   points are missing, if not it uses bilinear interpolation
 #'
 #' @return \code{\link{pTs}} object
-#' @export
+#' @export SelSpace3D selspace.3D
+#' @aliases SelSpace3D selspace.3D
 #' @author Thomas Laepple
 #' @examples
-selspace.3D <- function(data, lat1, lon1, SBOX = 5, tolLon = 10, bNN = FALSE, timeindexNA = 1) {
+SelSpace3D <- function(data, lat1, lon1, SBOX = 5, tolLon = 10, bNN = FALSE, timeindexNA = 1) {
   choice.lat <- lat1
   choice.lon <- lon1
   temp <- attributes(data)
@@ -151,4 +152,10 @@ selspace.3D <- function(data, lat1, lon1, SBOX = 5, tolLon = 10, bNN = FALSE, ti
   hist <- paste("selspace: lat=", lat1, " lon=", lon1, sep = "")
 
   return(addhistory(result, hist))
+}
+
+selspace.3D <- function(...){
+  warning("selspace.3D is deprecated and replaced with SelSpace3D
+          to comply with ECUS R style guide")
+  SelSpace3D(...)
 }
