@@ -147,11 +147,11 @@ SelSpace3D <- function(data, lat1, lon1, SBOX = 5, tolLon = 10, bNN = FALSE, tim
             }
   }
   # create time series
-  result <- pTs(intpoldata, time(data), choice.lat, choice.lon, getname(data), gethistory(data), date = FALSE)
+  result <- pTs(intpoldata, time(data), choice.lat, choice.lon, GetName(data), GetHistory(data), date = FALSE)
 
   hist <- paste("selspace: lat=", lat1, " lon=", lon1, sep = "")
 
-  return(addhistory(result, hist))
+  return(AddHistory(result, hist))
 }
 
 selspace.3D <- function(...){
