@@ -1,3 +1,22 @@
+##' @title first element of a vector
+##' @param x 
+##' @return first element of X
+##' @author Thomas Laepple
+FirstElement<-function (x)
+{
+    return(x[1])
+}
+
+##' @title last element of a vector
+##' @param x 
+##' @return last element of X
+##' @author Thomas Laepple
+LastElement<-function (x)
+{
+    return(x[length(x)])
+}
+
+
 #' SelSpace3D
 #'
 #' @param data pField object
@@ -43,7 +62,7 @@ SelSpace3D <- function(data, lat1, lon1, SBOX = 5, tolLon = 10, bNN = FALSE, tim
   } else pointer3d <- pointer3d.raw
 
 
-  wrap.dLon <- first(temp$lon) - (last(temp$lon) - 360)  #longitude jump by wrapping
+  wrap.dLon <- FirstElement(temp$lon) - (LastElement(temp$lon) - 360)  #longitude jump by wrapping
   if ((wrap.dLon > 0) & (wrap.dLon < tolLon)) {
     ### Check if we the data is global on the longitudes, than Copy the data 3 times.... to avoid breaks in the
     ### longitude
@@ -67,11 +86,11 @@ SelSpace3D <- function(data, lat1, lon1, SBOX = 5, tolLon = 10, bNN = FALSE, tim
 
 
   # attention... midpoints are given...
-  if ((lat1 > last(temp$lat)) | (lat1 < first(temp$lat))) {
+  if ((lat1 > LastElement(temp$lat)) | (lat1 < FirstElement(temp$lat))) {
     warning("Latitude outside field")
     return(NULL)
   }
-  if ((lon1 > last(lon.3c)) | (lon1 < first(lon.3c))) {
+  if ((lon1 > LastElement(lon.3c)) | (lon1 < FirstElement(lon.3c))) {
     warning("Longitude outside field")
     return(NULL)
   }
