@@ -6,11 +6,6 @@
 \usage{
 calcf(E, e)
 }
-\arguments{
-\item{E}{}
-
-\item{e}{}
-}
 \value{
 true anomaly f (theta)
 }
