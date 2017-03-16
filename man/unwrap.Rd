@@ -2,7 +2,7 @@
 % Please edit documentation in R/insolation.R
 \name{unwrap}
 \alias{unwrap}
-\title{corrects the radian phase angles in array P by adding multiples of <U+00B1>2pi when absolute jumps between consecutive array elements are greater than pi radians.}
+\title{corrects the radian phase angles in array P by adding multiples of \eqn{+- 2\pi} when absolute jumps between consecutive array elements are greater than pi radians.}
 \usage{
 unwrap(p)
 }
@@ -13,7 +13,7 @@ unwrap(p)
 unwrapped angles
 }
 \description{
-Q = unwrap(P) corrects the radian phase angles in array P by adding multiples of <U+00B1>2pi when absolute jumps between consecutive array elements are greater than pi radians.
+Q = unwrap(P) corrects the radian phase angles in array P by adding multiples of \eqn{+- 2\pi} when absolute jumps between consecutive array elements are greater than pi radians.
 based on http://ccrma.stanford.edu/~jos/sasp/Matlab_listing_unwrap_m.html
 }
 \author{

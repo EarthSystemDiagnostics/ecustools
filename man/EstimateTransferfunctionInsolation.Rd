@@ -25,7 +25,7 @@ list(coeff,coeff.lin,rsq=c(rsq1,rsq2),lag)
 coeff coefficient of polynomial, coeff.lin = coefficient of linear fit, rsq of linear and of polynomial fit; timelag in days
 }
 \description{
-Laepple, Thomas, and Gerrit Lohmann. 2009. <U+201C>Seasonal Cycle as Template for Climate Variability on Astronomical Timescales.<U+201D>
+Laepple, Thomas, and Gerrit Lohmann. 2009. “Seasonal Cycle as Template for Climate Variability on Astronomical Timescales.”
 Paleoceanography 24 (4): PA4201. doi:10.1029/2008PA001674.
 }
 \examples{

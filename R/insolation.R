@@ -8,12 +8,12 @@
 ##'
 ##' Calculate the Eccentricity anomaly E from the mean anomaly M, iterativly
 ##' inversion of Keplers formula: E-e*sin(E)=M  (188)
-##' @title Calculate the Eccentricity anomaly 
+##' @title Calculate the Eccentricity anomaly
 ##' @param M mean anomaly
-##' @param e 
+##' @param e
 ##' @param tol tolerance
 ##' @return Eccentricity anomaly E
-##' @author Thomas Laepple 
+##' @author Thomas Laepple
 calcE<-function(M,e,tol=1e-8)
 {
   E<-vector()
@@ -43,10 +43,10 @@ calcE<-function(M,e,tol=1e-8)
 ##' Orbits under the inverse square law
 ##' book: (181)
 ##' @title Calculate the true anomaly
-##' @param E 
-##' @param e 
+##' @param E
+##' @param e
 ##' @return true anomaly f (theta)
-##' @author Thomas Laepple 
+##' @author Thomas Laepple
 calcf<-function(E,e)
 {
 
@@ -64,10 +64,10 @@ temp[temp<0]<-temp[temp<0]+2*pi
 ##' @param ecc eccentricity
 ##' @param f true angle from perihelion
 ##' @return days from perihelion, calculated using the mean angle M
-##' @author Thomas Laepple 
+##' @author Thomas Laepple
 t.from.f<-function(ecc,f)
 #input : f = true angle from perihelion
-#output: t = 
+#output: t =
 {
     Tyear<-365.2422 #length of tropical year in days
     #Calculate the eccentricity anomaly E
@@ -90,7 +90,7 @@ t.from.f<-function(ecc,f)
 ##' @param ecc eccentricity
 ##' @param t days from perihelion
 ##' @return  true angle from perihelion (via the mean angle M)
-##' @author Thomas Laepple 
+##' @author Thomas Laepple
 f.from.t<-function(ecc,t)
 {
     Tyear<-365.2422 #length of tropical year in days
@@ -148,7 +148,7 @@ lat=lat*pi/180 # latitude
 if (day_type ==1) # calendar days
 {
     # estimate lambda from calendar day using an approximation from Berger 1978 section 3
-    delta_lambda_m <- (day-80)*2*pi/365.2422;  ## das wäre lambda bei gleich langen Tagen
+    delta_lambda_m <- (day-80)*2*pi/365.2422;  ## das w?re lambda bei gleich langen Tagen
 
     beta<-(1-ecc^2)^(1/2)
 
@@ -237,7 +237,7 @@ AnnualInsolation<-function(kyear,lat)
 ##' calculation of daily average insolation following Berger A. (1978).
 ##' Iterative solution for the Kepler equation, following Grossman; "The sheer joy of celestial mechanics,
 ##' Orbits under the inverse square law"
-##' 
+##'
 ##' Authors of original MATLAB version :
 ##'   Ian Eisenman and Peter Huybers, Harvard University, August 2006
 ##'   eisenman@fas.harvard.edu
@@ -269,7 +269,7 @@ AnnualInsolation<-function(kyear,lat)
 ##' @param day  Indicator of time of year; calendar day by default.
 ##' @param day_type Convention for specifying time of year (1,2,3) [optional], see details
 ##' @param fast TRUE = use precalculated values of orbital parameters in 100yr steps
-##' @param T.alpha for custom calendar (day_type=3) 
+##' @param T.alpha for custom calendar (day_type=3)
 ##' @param alpha for custom calendar (day_type=3)
 ##' @return list(Fsw=Fsw,ecc=ecc,obliquity=obliquity,long_perh=long_perh,lambda=lambda/2/pi*360 )
 ##'   Fsw = Daily average solar radiation in W/m^2.
@@ -345,7 +345,7 @@ return(list(Fsw=Fsw,ecc=ecc,obliquity=obliquity,long_perh=long_perh,lambda=lambd
 ##' @title return orbital parameters for a given year using preloaded 100yr resolution values
 ##' @param kyear  time in 1000 years before present (0..5000)
 ##' @return list(ecc=ecc,epsilon=epsilon,omega=omega)
-##' @author Thomas Laepple 
+##' @author Thomas Laepple
 orbital_parameters_fast<-function(kyear)
 {
 if ( length(orbital_global$ecc) != 50001) halt("orbital parameters not initalized")
@@ -361,7 +361,7 @@ return(list(ecc=orbital_global$ecc[kyear*10+1],epsilon=orbital_global$epsilon[ky
 ##' @param kyear time in 1000 years before present (0..5000)
 ##' @param FILEDATA Filename
 ##' @return list(ecc=ecc,epsilon=epsilon,omega=omega)
-##' @author Thomas Laepple 
+##' @author Thomas Laepple
 orbital_parameters<-function(kyear,FILEDATA="e:/data/insolation/data/ins_data.txt")
 {
 
@@ -384,12 +384,12 @@ return(list(ecc=ecc,epsilon=epsilon,omega=omega))
 }
 
 
-##' Q = unwrap(P) corrects the radian phase angles in array P by adding multiples of ±2pi when absolute jumps between consecutive array elements are greater than pi radians.
-##' based on http://ccrma.stanford.edu/~jos/sasp/Matlab_listing_unwrap_m.html
-##' @title  corrects the radian phase angles in array P by adding multiples of ±2pi when absolute jumps between consecutive array elements are greater than pi radians.
-##' @param p radian phase angles array
-##' @return unwrapped angles
-##' @author Thomas Laepple 
+#' Q = unwrap(P) corrects the radian phase angles in array P by adding multiples of \eqn{+- 2\pi} when absolute jumps between consecutive array elements are greater than pi radians.
+#' based on http://ccrma.stanford.edu/~jos/sasp/Matlab_listing_unwrap_m.html
+#' @title  corrects the radian phase angles in array P by adding multiples of \eqn{+- 2\pi} when absolute jumps between consecutive array elements are greater than pi radians.
+#' @param p radian phase angles array
+#' @return unwrapped angles
+#' @author Thomas Laepple
 unwrap<-function(p)
 {
 

@@ -9,8 +9,6 @@ calcE(M, e, tol = 1e-08)
 \arguments{
 \item{M}{mean anomaly}
 
-\item{e}{}
-
 \item{tol}{tolerance}
 }
 \value{
