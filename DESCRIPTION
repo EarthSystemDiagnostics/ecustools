@@ -17,3 +17,4 @@ Suggests: ncdf4,
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+Imports: Runuran
