@@ -37,4 +37,3 @@ adds attributes such as longitudes and latitudes to a gridded
 \author{
 Thomas Laepple
 }
-

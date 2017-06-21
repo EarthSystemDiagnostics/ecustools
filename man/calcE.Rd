@@ -26,4 +26,3 @@ inversion of Keplers formula: E-e*sin(E)=M  (188)
 \author{
 Thomas Laepple
 }
-

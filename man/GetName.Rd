@@ -23,4 +23,3 @@ GetName(c(a = 2))
 \author{
 Thomas Laepple
 }
-

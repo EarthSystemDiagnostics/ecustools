@@ -17,4 +17,3 @@ lagged values
 \author{
 Thomas Laepple
 }
-

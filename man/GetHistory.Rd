@@ -16,10 +16,9 @@ character
 \description{
 returns the "history" attribute of a pTs/pField object
 }
-\author{
-Thomas Laepple
-}
 \seealso{
 Other history: \code{\link{AddHistory}}
 }
-
+\author{
+Thomas Laepple
+}

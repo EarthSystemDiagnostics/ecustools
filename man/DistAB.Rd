@@ -35,4 +35,3 @@ DistAB(0,-75,c(0,1,2,3),c(-76,-75,-74,-73))
 \author{
 Rasmus E. Benestad (modified by Thomas Laepple)
 }
-

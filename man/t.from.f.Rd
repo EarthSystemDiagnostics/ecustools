@@ -23,4 +23,3 @@ book: (181)
 \author{
 Thomas Laepple
 }
-

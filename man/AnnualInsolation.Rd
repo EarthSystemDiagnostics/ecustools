@@ -23,4 +23,3 @@ plot(0:1000,AnnualInsolation(0:1000,40),main="mean annual insolation at 40degN",
 \author{
 Thomas Laepple
 }
-

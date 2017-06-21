@@ -15,4 +15,3 @@ list(ecc=ecc,epsilon=epsilon,omega=omega)
 \author{
 Thomas Laepple
 }
-

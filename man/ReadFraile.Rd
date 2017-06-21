@@ -26,4 +26,3 @@ e.g. bulloides or ruber... to get the list, leave it empty
 \author{
 Thomas Laepple
 }
-

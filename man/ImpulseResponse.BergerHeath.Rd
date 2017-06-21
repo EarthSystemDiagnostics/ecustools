@@ -19,4 +19,3 @@ weights of the impulse response function
 \author{
 Thomas Laepple
 }
-

@@ -29,4 +29,3 @@ examples
   plot(1:365,SimulateYearFromInsolation(0,transfer,40),type="l",main="predicted at 0 and 10kyr BP",xlab="day of the year")
   lines(1:365,SimulateYearFromInsolation(10,transfer,40),col="red")
 }
-

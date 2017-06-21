@@ -35,4 +35,3 @@ Function to interpolate a field to a given point specified by
 \author{
 Thomas Laepple
 }
-

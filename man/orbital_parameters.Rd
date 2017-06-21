@@ -22,4 +22,3 @@ Load the matrix contains data from Berger and Loutre (1991),
 \author{
 Thomas Laepple
 }
-

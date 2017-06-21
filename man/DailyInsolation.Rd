@@ -70,4 +70,3 @@ plot(1:365,DailyInsolation(0,40,1:365)$Fsw,main="modern daily insolation at 40de
 \author{
 Thomas Laepple
 }
-

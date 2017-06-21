@@ -36,4 +36,3 @@ result<-EstimateTransferfunctionInsolation(clim,70,bPlot=TRUE,b3plot=TRUE)
 \author{
 Thomas Laepple
 }
-

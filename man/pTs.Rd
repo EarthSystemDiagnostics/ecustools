@@ -36,4 +36,3 @@ pTs objects are enhanced time-series \code{\link[stats]{ts}} objects. \code{pTs(
 \author{
 Thomas Laepple
 }
-

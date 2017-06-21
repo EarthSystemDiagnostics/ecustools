@@ -21,4 +21,3 @@ hist(RWeights(100000,weights),breaks=501)
 \author{
 Thomas Laepple
 }
-

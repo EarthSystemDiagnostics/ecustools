@@ -15,4 +15,3 @@ last element of X
 \author{
 Thomas Laepple
 }
-

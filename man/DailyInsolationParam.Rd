@@ -52,4 +52,3 @@ of Kepler's equation
 \author{
 Thomas Laepple
 }
-
