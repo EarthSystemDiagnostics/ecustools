@@ -17,20 +17,6 @@ library(PaleoSpec)
 library(ecustools)
 ```
 
-```{r functions}
-##' assumes months of equal length and a 365 day lon year
-##' @title Bin daily values to monthly values
-##' @param ts.daily vector of 365 values
-##' @return vector of 12 values
-##' @author Thomas Laepple 
-MonthlyFromDaily <- function(ts.daily) {
-  mLength <- (365/12)
-  monthBreaks <- mLength/2 + (0:11) * mLength
-  monthly <- SubsampleTimeseriesBlock(ts.daily, timepoints = monthBreaks)
-  return(monthly)
-}
-```
-
 Set latitude and longitude of the simulated record
 
 ```{r}
