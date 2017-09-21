@@ -10,6 +10,7 @@
 #' @return Default: a ggplot2 object, optionally the correlations as a tibble.
 #' @details Ideas for code taken from here:
 #' http://www.sthda.com/english/wiki/ggplot2-quick-correlation-matrix-heatmap-r-software-and-data-visualization
+#'
 #' @examples
 #' \dontrun{
 #' if(interactive()) {
