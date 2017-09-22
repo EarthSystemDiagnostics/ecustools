@@ -37,14 +37,15 @@ PlotPairwiseCorrelations <- function(M,
                                      axis.label = NULL,
                                      return.corr.tibble = FALSE,
                                      plotit = TRUE){
-
+  if (is.null(colnames(M))) colnames(M) <- 1:ncol(M)
   c.m <- cor(M)
   c.m[lower.tri(c.m, diag = TRUE)] <- NA
   c.m <- tibble::as_tibble(c.m)
-  c.m <- dplyr::mutate(c.m, fac.a = colnames(c.m))
+  c.m <- dplyr::mutate(c.m, fac.a = colnames(M))
   c.m <- tidyr::gather(c.m, fac.b, Correlation, -fac.a)
-  c.m <- dplyr::mutate(c.m, fac.a = factor(fac.a, levels = unique(fac.a), ordered = TRUE),
-                       fac.b = factor(fac.b, levels = rev(unique(fac.b)), ordered = TRUE))
+  c.m <- dplyr::mutate(c.m,
+                       fac.a = factor(fac.a, levels = colnames(M), ordered = TRUE),
+                       fac.b = factor(fac.b, levels = rev(colnames(M)), ordered = TRUE))
 
   c.m <- dplyr::filter(c.m, complete.cases(Correlation))
 
