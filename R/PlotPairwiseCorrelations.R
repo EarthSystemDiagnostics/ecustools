@@ -8,6 +8,7 @@
 #' @param return.corr.tibble Return the correlations?, Default: FALSE
 #' @param plotit Plot the correlations, Default: TRUE
 #' @return Default: a ggplot2 object, optionally the correlations as a tibble.
+#' @author Andrew Dolman
 #' @details Ideas for code taken from here:
 #' http://www.sthda.com/english/wiki/ggplot2-quick-correlation-matrix-heatmap-r-software-and-data-visualization
 #'
@@ -26,7 +27,6 @@
 #'
 #' }
 #' }
-#' @seealso
 #' @rdname CorrelationMatrix
 #' @export
 #' @importFrom dplyr mutate filter

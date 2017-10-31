@@ -45,3 +45,6 @@ if(interactive()) {
 }
 }
 }
+\author{
+Andrew Dolman
+}
