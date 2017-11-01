@@ -25,8 +25,10 @@ SDofSD <- function(s, n) {
     stop("s must be >= 0")
   if(length(s) > 1 & length(n)==1)
     n <- rep(n, length(s))
+  if(length(n) > 1 & length(s)==1)
+    s <- rep(s, length(n))
   if(length(s) != length(n))
-    stop("s and n should be vectors of the same length")
+    stop("s and n should be vectors of either the same length, or one of them should be length == 1")
 
   ifelse(n <= 300, {
     message("Method: Exact")
