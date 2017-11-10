@@ -42,3 +42,44 @@ SDofSD <- function(s, n) {
 }
 
 
+
+#' Standard deviation of a numerical probability density function
+#'
+#' Calculates the standard deviation of a numerical probability density function,
+#' i.e. a vector of values and corresponding vector of densities. It is important
+#' that the range of x values cover a sufficient fraction of the total density.
+#' For continuous distributions it should extend well into the tails. The
+#' approximation will be better the finer the resolution of x.
+#'
+#' @param x vector of values
+#' @param d vector of densities, do not need to sum to 1
+#'
+#' @return numeric
+#' @export
+#' @rdname SDofNumDist
+#' @author Andrew Dolman <andrew.dolman@awi.de>
+#' @examples
+#' \dontrun{
+#' if(interactive()){
+#'  # Example 1
+#'  x <- seq(1, 100, by = 0.01)
+#'  d <- dnorm(x, 60, 5)
+#'  plot(x, d, type = "l")
+#'  SDofNumDist(x, d)
+#'
+#'  # Example 2
+#'  a <- 45
+#'  b <- 55
+#'  d2 <- dunif(x, a, b)
+#'  plot(x, d2, type = "l")
+#'  SDofNumDist(x, d2)
+#'
+#'  # analytical solution for uniform distribution
+#'  sqrt(1/12 * (b-a)^2)
+#'  }
+#' }
+SDofNumDist <- function(x, d){
+  d <- d / sum(d)
+  sqrt(sum(d*x^2) - sum(d*x)^2)
+}
+
