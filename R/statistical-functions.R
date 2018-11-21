@@ -43,7 +43,7 @@ SDofSD <- function(s, n) {
 
 
 
-#' Standard deviation of a numerical probability density function
+#' Standard deviation of a numerical probability density function.
 #'
 #' Calculates the standard deviation of a numerical probability density function,
 #' i.e. a vector of values and corresponding vector of densities. It is important
@@ -81,5 +81,48 @@ SDofSD <- function(s, n) {
 SDofNumDist <- function(x, d){
   d <- d / sum(d)
   sqrt(sum(d*x^2) - sum(d*x)^2)
+}
+
+
+#' Summarise an Empirical Probability Distribution Function.
+#'
+#' @param x A vector of values of empirical PDF
+#' @param p A vector of probabilities
+#' @details Calculation of the mode is naive. For a multimodal distribution only
+#' the highest is returned, in the case of 2 or more modes with exactly the same
+#'  probability, the first is returned.
+#' @return Returns a named vector with the mean, median, mode, and standard deviation of the empirical PDF
+#' @export
+#'
+#' @examples
+SummariseEmpiricalPDF <- function(x, p){
+
+  # Ensure x and p are sorted
+  p <- p[order(x)]
+  x <- sort(x)
+
+  # Ensure p sum to 1
+  p <- p / sum(p)
+
+  # Mean
+  w.mean <- sum(x * p)
+
+  # SD
+  M <- sum(p > 0)
+  w.sd <- sqrt(sum(p * (x-w.mean)^2) / ((M-1)/M * sum(p)))
+
+  # Median
+  csum.p <- cumsum(p)
+  med.ind <- which.min(abs(csum.p - 0.5))
+  w.median <- x[med.ind]
+
+  # Mode
+  max.wt <- max(p)
+  n.max <- sum(p == max.wt)
+  if (n.max > 1) warning(paste0(n.max,
+                                " x with equal maximum probability. Returning the first"))
+  mode <- x[which.max(p)]
+
+  return(c("mean" = w.mean, "median" = w.median, "mode" = mode, "sd" = w.sd))
 }
 

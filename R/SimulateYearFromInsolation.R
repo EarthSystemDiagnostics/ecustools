@@ -15,10 +15,10 @@
 SimulateYearFromInsolation<-function(kyear=0,transfer,latitude,bPolynomial=FALSE,anomalyRef=NULL)
     {
         insol<-(TLag(DailyInsolation(kyear,latitude,1:365)$Fsw,transfer$lag))
-        
+
         if (bPolynomial)
             {
-                
+
                 ins.1<-insol
                 ins.2<-insol^2
                 ins.3<-insol^3
@@ -30,7 +30,7 @@ SimulateYearFromInsolation<-function(kyear=0,transfer,latitude,bPolynomial=FALSE
 
                 }
         if (!is.null(anomalyRef)) result=result+anomalyRef
-        return(result)       
+        return(result)
     }
 
 

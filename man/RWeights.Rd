@@ -14,6 +14,9 @@ RWeights(n = 1000, weights)
 \value{
 vector of n random numbers between 1 and length(weights)
 }
+\description{
+Draw random number between 1 and length(weights) with the distribution
+}
 \examples{
 weights <- c(rep(1,10),1:10,10:1)
 hist(RWeights(100000,weights),breaks=501)

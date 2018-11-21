@@ -4,8 +4,8 @@
 \alias{DailyInsolation}
 \title{Computes the daily average insolation for any time in the last 5Million years}
 \usage{
-DailyInsolation(kyear, lat, day, day_type = 1, fast = TRUE, T.alpha = 80,
-  alpha = 0)
+DailyInsolation(kyear, lat, day, day_type = 1, fast = TRUE,
+  T.alpha = 80, alpha = 0)
 }
 \arguments{
 \item{kyear}{Thousands of years before present (0 to 5000).}

@@ -14,6 +14,9 @@ TLag(data, ilag)
 \value{
 lagged values
 }
+\description{
+timelag with rolling over at 365 days
+}
 \author{
 Thomas Laepple
 }

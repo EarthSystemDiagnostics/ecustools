@@ -12,6 +12,9 @@ orbital_parameters_fast(kyear)
 \value{
 list(ecc=ecc,epsilon=epsilon,omega=omega)
 }
+\description{
+return orbital parameters for a given year using preloaded 100yr resolution values
+}
 \author{
 Thomas Laepple
 }

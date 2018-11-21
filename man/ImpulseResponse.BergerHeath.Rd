@@ -16,6 +16,9 @@ ImpulseResponse.BergerHeath(z, d, z0 = 0)
 \value{
 weights of the impulse response function
 }
+\description{
+Deep solution for Berger and Heath; e.g. page 65 in Officer and Lynch
+}
 \author{
 Thomas Laepple
 }

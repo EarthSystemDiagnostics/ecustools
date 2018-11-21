@@ -2,7 +2,7 @@
 % Please edit documentation in R/statistical-functions.R
 \name{SDofNumDist}
 \alias{SDofNumDist}
-\title{Standard deviation of a numerical probability density function}
+\title{Standard deviation of a numerical probability density function.}
 \usage{
 SDofNumDist(x, d)
 }

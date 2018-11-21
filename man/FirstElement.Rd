@@ -6,11 +6,11 @@
 \usage{
 FirstElement(x)
 }
-\arguments{
-\item{x}{}
-}
 \value{
 first element of X
+}
+\description{
+first element of a vector
 }
 \author{
 Thomas Laepple

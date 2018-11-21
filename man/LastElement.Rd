@@ -6,11 +6,11 @@
 \usage{
 LastElement(x)
 }
-\arguments{
-\item{x}{}
-}
 \value{
 last element of X
+}
+\description{
+last element of a vector
 }
 \author{
 Thomas Laepple

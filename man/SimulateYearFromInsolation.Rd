@@ -21,6 +21,9 @@ SimulateYearFromInsolation(kyear = 0, transfer, latitude,
 \value{
 365 predicted values for each day of the year
 }
+\description{
+Simulate a year from a parametric relationship to insolation
+}
 \author{
 Thomas Laepple
 examples

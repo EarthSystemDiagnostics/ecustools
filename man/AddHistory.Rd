@@ -24,3 +24,4 @@ Other history: \code{\link{GetHistory}}
 \author{
 Thomas Laepple
 }
+\concept{history}

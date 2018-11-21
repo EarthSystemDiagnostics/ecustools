@@ -4,7 +4,8 @@
 \alias{orbital_parameters}
 \title{Load the orbital parameters and return them for a given year}
 \usage{
-orbital_parameters(kyear, FILEDATA = "e:/data/insolation/data/ins_data.txt")
+orbital_parameters(kyear,
+  FILEDATA = "e:/data/insolation/data/ins_data.txt")
 }
 \arguments{
 \item{kyear}{time in 1000 years before present (0..5000)}

@@ -1,5 +1,5 @@
 ##' @title first element of a vector
-##' @param x 
+##' @param x
 ##' @return first element of X
 ##' @author Thomas Laepple
 FirstElement<-function (x)
@@ -8,7 +8,7 @@ FirstElement<-function (x)
 }
 
 ##' @title last element of a vector
-##' @param x 
+##' @param x
 ##' @return last element of X
 ##' @author Thomas Laepple
 LastElement<-function (x)
