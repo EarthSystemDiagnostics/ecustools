@@ -126,3 +126,44 @@ SummariseEmpiricalPDF <- function(x, p){
   return(c("mean" = w.mean, "median" = w.median, "mode" = mode, "sd" = w.sd))
 }
 
+#' Expected range
+#'
+#' Calculates the expected range of n observations drawn from a distibution with standard deviation sd
+#' @param sd standard deviation
+#' @param n number of observations
+#'
+#' @return numeric
+#' @export
+#'
+#' @examples
+#'
+#' ExpectedRange(5, 15)
+#'
+#' \dontrun{
+#' library(tidyverse)
+#' ests <- expand.grid(mean = 0, sd = 2, n = 15, rep = 1:1000, i = 1:15) %>%
+#'   mutate(rdv = rnorm(n(), mean, sd)) %>%
+#'   group_by(mean, sd, n, rep) %>%
+#'   summarise(sd_hat = sd(rdv),
+#'             obs.range = diff(range(rdv))) %>%
+#'   group_by(mean, sd, n, rep) %>%
+#'   mutate(sd.range = 2*sd_hat*integrate(f,-Inf,Inf, n = n)$value,
+#'          exp.range = ExpectedRange(sd, n))
+#' ests %>%
+#'   gather(estimate, value, -mean, -sd, -n, -rep, -sd_hat, -exp.range) %>%
+#'   ggplot(aes(x = estimate, y = value)) +
+#'   geom_boxplot() +
+#'   geom_hline(aes(yintercept = exp.range)) +
+#'   facet_wrap(~n)
+#'   }
+ExpectedRange <- function(sd, n){
+
+  f <- function(x, n) n*x*pnorm(x)^(n-1)*dnorm(x)
+
+  exp.range <- 2*sd*integrate(f,-Inf,Inf, n = n)$value
+
+  return(exp.range)
+
+}
+
+
