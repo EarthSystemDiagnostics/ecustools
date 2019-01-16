@@ -4,8 +4,9 @@
 \alias{ggpolar}
 \title{Nicely formatted polar ggplot}
 \usage{
-ggpolar(pole = c("N", "S"), max.lat, min.lat, longitude.spacing = 60,
-  land.fill.colour = "Grey", n.lat.labels = 4, nearest.x.degrees = 5)
+ggpolar(pole = c("N", "S"), max.lat, min.lat, min.lon = -180,
+  max.lon = 180, longitude.spacing = 60, land.fill.colour = "Grey",
+  n.lat.labels = 4, nearest.x.degrees = 5, rotate = FALSE)
 }
 \arguments{
 \item{pole}{which pole N or S?}
@@ -14,6 +15,10 @@ ggpolar(pole = c("N", "S"), max.lat, min.lat, longitude.spacing = 60,
 
 \item{min.lat}{minimum latitude}
 
+\item{min.lon}{minimum longitude}
+
+\item{max.lon}{maximum longitude}
+
 \item{longitude.spacing}{interval between longitude axis tick marks}
 
 \item{land.fill.colour}{colour to shade the land}
@@ -21,15 +26,41 @@ ggpolar(pole = c("N", "S"), max.lat, min.lat, longitude.spacing = 60,
 \item{n.lat.labels}{approximate number of latitude tickmarks}
 
 \item{nearest.x.degrees}{round latitude tickmarks to how many degrees?}
+
+\item{rotate}{if plotting a segement of < 360 degrees longitude, rotate plot
+so that north is up (or south is down)}
 }
 \description{
-Produce a nicely formatted map of the Arctic or Antarctic in
-polar projection. Adapted from Mikey Harper's plot
-https://stackoverflow.com/a/49084793
+Produce a nicely formatted maps of the Arctic or Antarctic in
+polar projection. Also works for longitudinal segements, e.g. just Greenland.
+Adapted from Mikey Harper's plot https://stackoverflow.com/a/49084793
 }
 \examples{
 ggpolar(pole = "N", max.lat = 90, min.lat = 55, n.lat.labels = 4)
 ggpolar(pole = "S", max.lat = -60, min.lat = -90)
+
+ggpolar(pole = "N", max.lat = 90, min.lat = 55,
+               max.lon = 0, min.lon = -80,
+               longitude.spacing = 15, n.lat.labels = 5) +
+  geom_point(aes(x = -35, y = 75, colour = "sd")) +
+  geom_point(aes(x = -35, y = 70, colour = "sf"))
+
+
+ggpolar(pole = "N", max.lat = 90, min.lat = 55,
+               max.lon = 0, min.lon = -80,
+               longitude.spacing = 30,
+               rotate = TRUE)
+
+ggpolar(pole = "S", max.lat = -55, min.lat = -90,
+        max.lon = 80, min.lon = -20,
+        longitude.spacing = 30,
+        rotate = TRUE)
+
+
+ggpolar(pole = "N", max.lat = 90, min.lat = 55,
+               max.lon = 170, min.lon = -180,
+               longitude.spacing = 33)
+
 \dontrun{
 ggpolar(pole = "W", max.lat = -55, min.lat = -90)
 ggpolar(pole = "S", max.lat = 90, min.lat = 55)
