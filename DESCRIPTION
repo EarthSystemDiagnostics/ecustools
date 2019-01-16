@@ -17,4 +17,4 @@ Suggests: ncdf4,
     knitr,
     rmarkdown
 VignetteBuilder: knitr
-Imports: tibble,dplyr,tidyr,ggplot2,ncdf4,Runuran
+Imports: tibble,dplyr,tidyr,ggplot2,ncdf4,Runuran,raster,maptools
