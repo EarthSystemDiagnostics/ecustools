@@ -65,7 +65,6 @@ ggpolar <- function(pole = c("N", "S"),
 
   is.segment <- isFALSE(min.lon == -180 & max.lon == 180)
 
-
   mean.lon <- mean(c(min.lon, max.lon))
 
   # if not a segment
@@ -75,6 +74,7 @@ ggpolar <- function(pole = c("N", "S"),
 
   if (rotate) {rotate.to <- mean.lon} else {rotate.to <- 0}
 
+  lat.range <- abs(max.lat - min.lat)
   d.lat.ax.vals <- nearest.x.degrees * round((max.lat - min.lat)/n.lat.labels/nearest.x.degrees)
 
   # Hemishphere specific values
@@ -82,8 +82,8 @@ ggpolar <- function(pole = c("N", "S"),
     lat.ax.vals <- seq(min.lat + d.lat.ax.vals, max.lat,
                        by = d.lat.ax.vals)
     outer.lat.ax.val <- min.lat
-    long.lab.pos.1 <- outer.lat.ax.val - 1.5
-    long.lab.pos.2 <- outer.lat.ax.val - 2.5
+    long.lab.pos.1 <- outer.lat.ax.val - (lat.range / 20)
+    long.lab.pos.2 <- outer.lat.ax.val - (lat.range / 7)
 
     long.line.strt <- max.lat
     long.line.end <- long.lab.pos.1
@@ -92,8 +92,8 @@ ggpolar <- function(pole = c("N", "S"),
     lat.ax.vals <- seq(max.lat - d.lat.ax.vals, min.lat,
                        by = -d.lat.ax.vals)
     outer.lat.ax.val <- max.lat
-    long.lab.pos.1 <- outer.lat.ax.val + 1.5
-    long.lab.pos.2 <- outer.lat.ax.val + 2.5
+    long.lab.pos.1 <- outer.lat.ax.val + (lat.range / 20)
+    long.lab.pos.2 <- outer.lat.ax.val + (lat.range / 7)
 
     long.line.strt <- long.lab.pos.1
     long.line.end <- min.lat
@@ -132,13 +132,16 @@ ggpolar <- function(pole = c("N", "S"),
     coord_map("ortho", orientation = c(ifelse(pole == "N", 90, -90),
                                        rotate.to,
                                        0),
-              xlim = c(min.lon, max.lon)) +
+              #ylim = sort(c(max.lat*0.8, min.lat*0.8)),
+              xlim = c(min.lon, max.lon)
+              ) +
 
     # Remove axes and labels
     scale_x_continuous("", breaks = NULL) +
     scale_y_continuous("", breaks = NULL) +
 
     # Add axes and labels
+
 
     # Longitude axis lines and labels
     geom_segment(aes(y = long.line.strt, yend = long.line.end,
@@ -156,7 +159,7 @@ ggpolar <- function(pole = c("N", "S"),
     # Lat axis labels
     geom_label(aes(x = mean.lon, y = lat.ax.vals, label = lat.ax.labs),
                #hjust = -0.2,
-               alpha = 0.5) +
+               alpha = 0.75, label.size = 0) +
 
     # Change theme to remove panel backgound
     theme(panel.background = element_blank())
