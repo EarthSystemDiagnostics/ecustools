@@ -63,7 +63,7 @@ ggpolar <- function(pole = c("N", "S"),
   stopifnot(max.lat > min.lat)
   stopifnot(max.lon <= 180 & min.lon >= -180 & max.lat <= 90 & min.lat >= -90)
 
-  is.segment <- isFALSE(min.lon == -180 & max.lon == 180)
+  is.segment <- (min.lon == -180 & max.lon == 180) == FALSE
 
   mean.lon <- mean(c(min.lon, max.lon))
 
