@@ -43,6 +43,11 @@
 #'                max.lon = 170, min.lon = -180,
 #'                longitude.spacing = 33)
 #'
+#' # set country.outline.colour the same as land.fill.colour to hide political
+#' # boundaries
+#' ggpolar(pole = "N", max.lat = 90, min.lat = 65, n.lat.labels = 4,
+#'  country.outline.colour = "Grey")
+#'
 #' \dontrun{
 #' ggpolar(pole = "W", max.lat = -55, min.lat = -90)
 #' ggpolar(pole = "S", max.lat = 90, min.lat = 55)
@@ -53,6 +58,7 @@ ggpolar <- function(pole = c("N", "S"),
                     min.lon = -180, max.lon = 180,
                     longitude.spacing = 60,
                     land.fill.colour = "Grey",
+                    country.outline.colour = "Black",
                     n.lat.labels = 4, nearest.x.degrees = 5, rotate = FALSE) {
 
   pole <- match.arg(pole, choices = c("N", "S"))
@@ -127,7 +133,7 @@ ggpolar <- function(pole = c("N", "S"),
 
     # Plot map outline and project to polar coordinates
     geom_polygon(data = map.outline, aes(x = long, y = lat, group = group),
-                 fill = land.fill.colour, colour = "black", alpha = 0.8) +
+                 fill = land.fill.colour, colour = country.outline.colour) +
 
     coord_map("ortho", orientation = c(ifelse(pole == "N", 90, -90),
                                        rotate.to,
@@ -173,6 +179,8 @@ ggpolar <- function(pole = c("N", "S"),
 
   p
 }
+
+
 
 
 # # ## DUMMY Data

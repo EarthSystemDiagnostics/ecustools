@@ -6,7 +6,8 @@
 \usage{
 ggpolar(pole = c("N", "S"), max.lat, min.lat, min.lon = -180,
   max.lon = 180, longitude.spacing = 60, land.fill.colour = "Grey",
-  n.lat.labels = 4, nearest.x.degrees = 5, rotate = FALSE)
+  country.outline.colour = "Black", n.lat.labels = 4,
+  nearest.x.degrees = 5, rotate = FALSE)
 }
 \arguments{
 \item{pole}{which pole N or S?}
@@ -60,6 +61,11 @@ ggpolar(pole = "S", max.lat = -55, min.lat = -90,
 ggpolar(pole = "N", max.lat = 90, min.lat = 55,
                max.lon = 170, min.lon = -180,
                longitude.spacing = 33)
+
+# set country.outline.colour the same as land.fill.colour to hide political
+# boundaries
+ggpolar(pole = "N", max.lat = 90, min.lat = 65, n.lat.labels = 4,
+ country.outline.colour = "Grey")
 
 \dontrun{
 ggpolar(pole = "W", max.lat = -55, min.lat = -90)
