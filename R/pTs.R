@@ -8,9 +8,10 @@
 #' @param history character string to append to the history attribute
 #' @param date logical, whether or not to append the current date to the history attribute
 #'
-#' @description pTs objects are enhanced time-series \code{\link[stats]{ts}} objects. \code{pTs()} adds attributes such as longitude and latitude to a time series
-#'   vector/time series vectors (having the same time basis) and assigns the
-#'   class "pTs" to the resulting object
+#' @description pTs objects are enhanced time-series \code{\link[stats]{ts}}
+#'   objects. \code{pTs()} adds attributes such as longitude and latitude to a
+#'   time series vector/time series vectors (having the same time basis) and
+#'   assigns the class "pTs" to the resulting object
 #' @source Function copied from "proxytype.R" in paleolibary/src/
 #'
 #' @return pTs object

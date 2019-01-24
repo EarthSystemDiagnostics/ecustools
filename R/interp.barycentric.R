@@ -2,15 +2,16 @@
 #' measured at locations X
 #'
 #' @param X An n-by-d matrix. The rows of x represent n points in d-dimensional
-#' space.
+#'   space.
 #' @param f A vector of values nrow(X) long to be interpolated.
 #' @param Xi An ni-by-d matrix. The rows of xi represent n points in
-#' d-dimensional space whose positions in the mesh are being sought.
+#'   d-dimensional space whose positions in the mesh are being sought.
 #' @references Adapted from code here:
-#' https://dahtah.wordpress.com/2013/03/06/barycentric-interpolation-fast-interpolation-on-arbitrary-grids/
+#'   https://dahtah.wordpress.com/2013/03/06/barycentric-interpolation-fast-interpolation-on-arbitrary-grids/
+#'
 #' @author Andrew Dolman <andrew.dolman@awi.de>
 #' @return
-#' @import   geometry Matrix
+#' @import geometry Matrix
 #' @export
 #'
 #' @examples
@@ -22,7 +23,7 @@
 #'                                z = seq(min(z), max(z), length.out = 5)
 #' ))
 #'
-#' out <- interp.barycentric(X = df[,c(1,2,3)],
+#' out <- InterpBarycentric(X = df[,c(1,2,3)],
 #'                           f = df$v,
 #'                           Xi = df.reg)
 #'
@@ -34,24 +35,26 @@
 #' abline(0, 1)
 #'
 #' hist(out$v - out$v_true)
-interp.barycentric <- function(X, f, Xi)
-{
+InterpBarycentric <- function(X, f, Xi) {
   X <- as.matrix(X)
   Xi <- as.matrix(Xi)
-  dn <- delaunayn(X)
-  tri <- tsearchn(X, dn, Xi, fast = TRUE)
-
+  dn <- geometry::delaunayn(X)
+  tri <- geometry::tsearchn(X, dn, Xi, fast = TRUE)
+  
   # points in Xi that fall inside polygons
   good.ind <- which(is.na(tri$idx) == FALSE)
-  Xi.2 <- Xi[good.ind,]
-  tri <- tsearchn(X, dn, Xi.2, fast = TRUE)
-
-  #For each line in Xi.2, defines which points in X contribute to the interpolation
-  active <- dn[tri$idx,]
-  #Define the interpolation as a sparse matrix operation. Faster than using apply, probably slower than a C implementation
-  M <- sparseMatrix(i=rep(1:nrow(Xi.2), each=ncol(Xi.2)+1),j=as.numeric(t(active)),x=as.numeric(t(tri$p)),dims=c(nrow(Xi.2),length(f)))
-  v <- as.numeric(M%*%f)
-
+  Xi.2 <- Xi[good.ind, ]
+  tri <- geometry::tsearchn(X, dn, Xi.2, fast = TRUE)
+  
+  # For each line in Xi.2, defines which points in X contribute to the
+  # interpolation
+  active <- dn[tri$idx, ]
+  # Define the interpolation as a sparse matrix operation. Faster than using apply,
+  # probably slower than a C implementation
+  M <- Matrix::sparseMatrix(i = rep(1:nrow(Xi.2), each = ncol(Xi.2) + 1), j = as.numeric(t(active)), 
+                            x = as.numeric(t(tri$p)), dims = c(nrow(Xi.2), length(f)))
+  v <- as.numeric(M %*% f)
+  
   out <- cbind(Xi, v = NA)
   out[good.ind, "v"] <- v
   return(out)

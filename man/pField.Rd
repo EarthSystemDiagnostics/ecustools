@@ -19,7 +19,8 @@ pField(data, time, lat = 0, lon = 0, name = " ", history = " ",
 
 \item{lon}{vector of longitudes, defaults to 0}
 
-\item{name}{character string giving the name of the pField object to be generated}
+\item{name}{character string giving the name of the pField object to be
+generated}
 
 \item{history}{character string to append to the history attribute}
 
@@ -30,9 +31,9 @@ a pField object
 }
 \description{
 adds attributes such as longitudes and latitudes to a gridded
-  data array (which in most cases is three-dimensional and where the dimensions
-  stand in general for longitude, latitude and time) and assigns the class
-  "pField" to the resulting object.
+  data array (which in most cases is three-dimensional and where the
+  dimensions stand in general for longitude, latitude and time) and assigns
+  the class "pField" to the resulting object.
 }
 \author{
 Thomas Laepple

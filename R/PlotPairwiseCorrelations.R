@@ -2,15 +2,16 @@
 #' @description Takes a matrix or dataframe and calculates the pairwise
 #'   correlations between all columns. Plots these as a ggplot tilemap.
 #'   Optionally returns the pairwise correlations as a tidy tibble.
-#' @param M A matrix or dataframe for which the pairwise corrlelations between the
-#'   columns are desired.
+#' @param M A matrix or dataframe for which the pairwise corrlelations between
+#'   the columns are desired.
 #' @param axis.label Optional label for x,y figure axes, Default: NULL
 #' @param return.corr.tibble Return the correlations?, Default: FALSE
 #' @param plotit Plot the correlations, Default: TRUE
 #' @return Default: a ggplot2 object, optionally the correlations as a tibble.
 #' @author Andrew Dolman
 #' @details Ideas for code taken from here:
-#' http://www.sthda.com/english/wiki/ggplot2-quick-correlation-matrix-heatmap-r-software-and-data-visualization
+#'   http://www.sthda.com/english/wiki/ggplot2-quick-correlation-matrix-heatmap-r-software-and-data-visualization
+#'
 #'
 #' @examples
 #' \dontrun{
@@ -30,7 +31,8 @@
 #' @rdname CorrelationMatrix
 #' @export
 #' @importFrom dplyr mutate filter
-#' @importFrom ggplot2 ggplot aes geom_tile geom_text scale_fill_gradient2 scale_x_discrete scale_y_discrete theme_minimal coord_fixed
+#' @importFrom ggplot2 ggplot aes geom_tile geom_text scale_fill_gradient2
+#'   scale_x_discrete scale_y_discrete theme_minimal coord_fixed
 #' @importFrom tibble as_tibble
 #' @importFrom tidyr gather
 PlotPairwiseCorrelations <- function(M,
@@ -54,7 +56,8 @@ PlotPairwiseCorrelations <- function(M,
   if (plotit){
     p <- ggplot2::ggplot(c.m, ggplot2::aes(x = fac.a, y = fac.b, fill = Correlation))
     p <- p + ggplot2::geom_tile(colour = "white")
-    p <- p + ggplot2::geom_text(ggplot2::aes(label = round(Correlation, 2)), color = "black", size = 4)
+    p <- p + ggplot2::geom_text(ggplot2::aes(label = round(Correlation, 2)),
+                                color = "black", size = 4)
     p <- p + ggplot2::scale_fill_gradient2(low = "blue", high = "yellow",
                                   mid = "white", midpoint = 0,
                                   limit = c(-1,1),

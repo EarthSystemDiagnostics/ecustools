@@ -2,7 +2,7 @@
 % Please edit documentation in R/ReadCMIP5Ensemble.R
 \name{ReadCMIP5Ensemble}
 \alias{ReadCMIP5Ensemble}
-\title{Read the multimodel-ensemble of  CMIP5 climate model data}
+\title{Read the multimodel-ensemble of CMIP5 climate model data.}
 \usage{
 ReadCMIP5Ensemble(path = "", bFullEnsemble = TRUE,
   METAFILE = paste(path, "filelist.txt", sep = ""), DATADIR = path,
@@ -27,22 +27,23 @@ ReadCMIP5Ensemble(path = "", bFullEnsemble = TRUE,
 \item{varname}{variable name to be read}
 }
 \value{
-list(cdat,meta)
+list(cdat, meta)
 cdat= List of pField objects
-meta: List of vectors; name = unique name, modelName = modelName... ensMember = Ensemble member, here 1..100
+meta: List of vectors: name = unique name, modelName = modelName... 
+ensMember = Ensemble member, here 1..100
 }
 \description{
-Read the multimodel-ensemble of  CMIP5 climate model data
-It expects a filelist (txt file with two columns, first column
-model name e.g. CCSM4, second column number of ensemble members 8
-and expects that the filenames are formatted in a simplified CMIP5 formatting except
-PREFIX_modelname_MIDDLE_ensmemberNumber_SUFFIX
-The perl scripts for processing the CMIP5 simulations to this format
-are oder geonob1/ecus/pool/cmip5/scripts
+Reads the multimodel-ensemble of CMIP5 climate model data. It
+  expects a filelist (txt file with two columns, first column model name e.g.
+  CCSM4, second column number of ensemble members) and expects that the
+  filenames are formatted in a simplified CMIP5 formatting except
+  PREFIX_modelname_MIDDLE_ensmemberNumber_SUFFIX.
+  The perl scripts for processing the CMIP5 simulations to this format are 
+  oder geonob1/ecus/pool/cmip5/scripts.
 }
 \examples{
-#DO NOT RUN: past1000<-ReadCMIP5Ensemble(path="/model/CMIP5/past1000/tas.djfmam/",
-#MIDDLE = "_past1000_",SUFFIX=".ncdjfmam")
+\dontrun{past1000 <- ReadCMIP5Ensemble(path="/model/CMIP5/past1000/tas.djfmam/", 
+MIDDLE = "_past1000_",SUFFIX=".ncdjfmam")}
 }
 \author{
 Thomas Laepple

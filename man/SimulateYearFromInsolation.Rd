@@ -24,11 +24,13 @@ SimulateYearFromInsolation(kyear = 0, transfer, latitude,
 \description{
 Simulate a year from a parametric relationship to insolation
 }
+\examples{
+clim <- SelSpace3D(sat.ncep.clim, lat1 = 40, lon1 = 200)
+transfer <- EstimateTransferfunctionInsolation(clim, 40, bPlot = FALSE, b3plot = FALSE)
+plot(1:365, SimulateYearFromInsolation(0, transfer, 40), type = "l",
+     main = "predicted at 0 and 10kyr BP", xlab = "day of the year")
+lines(1:365, SimulateYearFromInsolation(10, transfer, 40), col = "red")
+}
 \author{
 Thomas Laepple
-examples
-  clim<-SelSpace3D(sat.ncep.clim,lat1=40,lon1=200)
-  transfer<-EstimateTransferfunctionInsolation(clim,40,bPlot=FALSE,b3plot=FALSE)
-  plot(1:365,SimulateYearFromInsolation(0,transfer,40),type="l",main="predicted at 0 and 10kyr BP",xlab="day of the year")
-  lines(1:365,SimulateYearFromInsolation(10,transfer,40),col="red")
 }

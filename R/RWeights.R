@@ -1,4 +1,4 @@
-##' @title  Draw random number between 1 and length(weights) with the distribution
+##' @title Draw random number between 1 and length(weights) with the distribution
 ##' @param n Number of random numbers to be drawn
 ##' @param weights vector of numbers; defines the distribution
 ##' @return vector of n random numbers between 1 and length(weights)

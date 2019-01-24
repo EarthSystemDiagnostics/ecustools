@@ -29,9 +29,10 @@ pTs(data, time, lat = 0, lon = 0, name = "", history = "",
 pTs object
 }
 \description{
-pTs objects are enhanced time-series \code{\link[stats]{ts}} objects. \code{pTs()} adds attributes such as longitude and latitude to a time series
-  vector/time series vectors (having the same time basis) and assigns the
-  class "pTs" to the resulting object
+pTs objects are enhanced time-series \code{\link[stats]{ts}}
+  objects. \code{pTs()} adds attributes such as longitude and latitude to a
+  time series vector/time series vectors (having the same time basis) and
+  assigns the class "pTs" to the resulting object
 }
 \author{
 Thomas Laepple

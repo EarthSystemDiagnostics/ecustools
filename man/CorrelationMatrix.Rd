@@ -8,8 +8,8 @@ PlotPairwiseCorrelations(M, axis.label = NULL,
   return.corr.tibble = FALSE, plotit = TRUE)
 }
 \arguments{
-\item{M}{A matrix or dataframe for which the pairwise corrlelations between the
-columns are desired.}
+\item{M}{A matrix or dataframe for which the pairwise corrlelations between
+the columns are desired.}
 
 \item{axis.label}{Optional label for x,y figure axes, Default: NULL}
 
@@ -27,7 +27,7 @@ Takes a matrix or dataframe and calculates the pairwise
 }
 \details{
 Ideas for code taken from here:
-http://www.sthda.com/english/wiki/ggplot2-quick-correlation-matrix-heatmap-r-software-and-data-visualization
+  http://www.sthda.com/english/wiki/ggplot2-quick-correlation-matrix-heatmap-r-software-and-data-visualization
 }
 \examples{
 \dontrun{

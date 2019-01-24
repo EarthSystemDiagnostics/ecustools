@@ -4,13 +4,14 @@
 #' @param time vector
 #' @param lat vector of latitudes, defaults to 0
 #' @param lon vector of longitudes, defaults to 0
-#' @param name character string giving the name of the pField object to be generated
+#' @param name character string giving the name of the pField object to be
+#'   generated
 #' @inheritParams pTs
 #'
 #' @description adds attributes such as longitudes and latitudes to a gridded
-#'   data array (which in most cases is three-dimensional and where the dimensions
-#'   stand in general for longitude, latitude and time) and assigns the class
-#'   "pField" to the resulting object.
+#'   data array (which in most cases is three-dimensional and where the
+#'   dimensions stand in general for longitude, latitude and time) and assigns
+#'   the class "pField" to the resulting object.
 #' @source Function copied from "proxytype.R" in paleolibary/src/
 #'
 #' @return a pField object

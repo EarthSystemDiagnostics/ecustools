@@ -156,14 +156,13 @@ SummariseEmpiricalPDF <- function(x, p){
 #'   geom_hline(aes(yintercept = exp.range)) +
 #'   facet_wrap(~n)
 #'   }
-ExpectedRange <- function(sd, n){
-
-  f <- function(x, n) n*x*pnorm(x)^(n-1)*dnorm(x)
-
-  exp.range <- 2*sd*integrate(f,-Inf,Inf, n = n)$value
-
+ExpectedRange <- function(sd, n) {
+  
+  f <- function(x, n) n * x * pnorm(x)^(n - 1) * dnorm(x)
+  
+  exp.range <- 2 * sd * integrate(f, -Inf, Inf, n = n)$value
+  
   return(exp.range)
-
 }
 
 

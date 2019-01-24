@@ -1,22 +1,21 @@
-
-##' from clim.pact
-##' @title Distance in km between two coordinates given by lat/lon
-##' @param lon  Longitude Degree East (scalar)
-##' @param lat  Latitude Degree North (scalar)
-##' @param lons Longitude Degree East (scalar or vector)
-##' @param lats Latitude Degree North (scalar or vector of same length than lons)
-##' @param a radius of the er
-##' @return distance in km
-##' @author Rasmus E. Benestad (modified by Thomas Laepple)
-##' @examples
-##' #Distance in the tropics
-##' DistAB(0,0,1,0)
-##' DistAB(0,0,0,1)
-##' #Distance in the polar regions around EDML core-site
-##' DistAB(0,-75,1,-75)
-##' DistAB(0,-75,0,-76)
-##' DistAB(0,-75,c(0,1,2,3),c(-76,-75,-74,-73))
-##' @export
+#' from clim.pact
+#' @title Distance in km between two coordinates given by lat/lon
+#' @param lon  Longitude Degree East (scalar)
+#' @param lat  Latitude Degree North (scalar)
+#' @param lons Longitude Degree East (scalar or vector)
+#' @param lats Latitude Degree North (scalar or vector of same length than lons)
+#' @param a radius of the er
+#' @return distance in km
+#' @author Rasmus E. Benestad (modified by Thomas Laepple)
+#' @examples
+#' #Distance in the tropics
+#' DistAB(0,0,1,0)
+#' DistAB(0,0,0,1)
+#' #Distance in the polar regions around EDML core-site
+#' DistAB(0,-75,1,-75)
+#' DistAB(0,-75,0,-76)
+#' DistAB(0,-75,c(0,1,2,3),c(-76,-75,-74,-73))
+#' @export
 DistAB <- function(lon,lat,lons,lats) {
   a=6.378e06
   good <- is.finite(lons) & is.finite(lats)
