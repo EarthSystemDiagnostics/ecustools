@@ -33,7 +33,7 @@ getname <- function(...){
 #' @author Thomas Laepple
 #' @examples
 GetHistory <- function(data) {
-  print(match.call())
+  #print(match.call())
   return(attr(data, "history"))
 }
 gethistory <- function(...){

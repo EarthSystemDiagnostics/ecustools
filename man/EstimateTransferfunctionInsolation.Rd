@@ -2,7 +2,8 @@
 % Please edit documentation in R/EstimateTransferFunctionInsolation.R
 \name{EstimateTransferfunctionInsolation}
 \alias{EstimateTransferfunctionInsolation}
-\title{Estimate linear or polynomial transfer function between insolation and a climate parameter}
+\title{Estimate linear or polynomial transfer function between insolation and
+  a climate parameter}
 \usage{
 EstimateTransferfunctionInsolation(climate, latitude, polynom.order = 3,
   clab = "", bPlot = FALSE, b3plot = FALSE, main = "")
@@ -21,17 +22,20 @@ EstimateTransferfunctionInsolation(climate, latitude, polynom.order = 3,
 \item{main}{Title of the plot}
 }
 \value{
-list(coeff,coeff.lin,rsq=c(rsq1,rsq2),lag)
-coeff coefficient of polynomial, coeff.lin = coefficient of linear fit, rsq of linear and of polynomial fit; timelag in days
+list(coeff, coeff.lin, rsq = c(rsq1, rsq2),lag) 
+coeff coefficient of polynomial, 
+coeff.lin = coefficient of linear fit, 
+rsq of linear and of polynomial fit, 
+timelag in days
 }
 \description{
-Laepple, Thomas, and Gerrit Lohmann. 2009. “Seasonal Cycle as Template for Climate Variability on Astronomical Timescales.”
-Paleoceanography 24 (4): PA4201. doi:10.1029/2008PA001674.
+Estimate linear or polynomial transfer function between insolation and
+  a climate parameter
 }
 \examples{
-clim<-SelSpace3D(sat.ncep.clim,lat1=40,lon1=200)
+clim <- SelSpace3D(sat.ncep.clim, lat1 = 40, lon1 = 200)
 
-result<-EstimateTransferfunctionInsolation(clim,70,bPlot=TRUE,b3plot=TRUE)
+result <- EstimateTransferfunctionInsolation(clim, 70, bPlot=TRUE, b3plot=TRUE)
 }
 \author{
 Thomas Laepple

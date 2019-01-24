@@ -10,12 +10,11 @@ calcf(E, e)
 true anomaly f (theta)
 }
 \description{
-Calculate the true anomaly f (theta) from the eccentricity anomaly
-true anomaly = angle between the point and perihelion
-based on
-Grossman; The sheer joy of celestial mechanics
-Orbits under the inverse square law
-book: (181)
+Calculate the true anomaly f (theta) from the eccentricity
+anomaly true anomaly = angle between the point and perihelion
+based on Grossman, N.: Orbits under the Inverse Square Law, in
+The Sheer Joy of Celestial Mechanics, edited by N. Grossman, pp. 41–61,
+Birkhäuser Boston, Boston, MA., 1996.
 }
 \author{
 Thomas Laepple

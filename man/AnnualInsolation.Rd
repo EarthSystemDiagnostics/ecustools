@@ -15,10 +15,14 @@ AnnualInsolation(kyear, lat)
 daily average solar radiation in W/m^2 averaged over the year
 }
 \description{
+Annual insolation for any year of the last 5Mio years
+}
+\details{
 for details see daily_insolation_param
 }
 \examples{
-plot(0:1000,AnnualInsolation(0:1000,40),main="mean annual insolation at 40degN",xlab="kyr BP",ylab="W/m2")
+plot(0:1000, AnnualInsolation(0:1000, 40), main = "mean annual insolation at 40degN",
+xlab = "kyr BP", ylab = "W/m2")
 }
 \author{
 Thomas Laepple

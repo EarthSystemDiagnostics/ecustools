@@ -9,19 +9,19 @@ calcE(M, e, tol = 1e-08)
 \arguments{
 \item{M}{mean anomaly}
 
+\item{e}{}
+
 \item{tol}{tolerance}
 }
 \value{
 Eccentricity anomaly E
 }
 \description{
-based on
-Grossman; The sheer joy of celestial mechanics
-Orbits under the inverse square law
-}
-\details{
-Calculate the Eccentricity anomaly E from the mean anomaly M, iterativly
-inversion of Keplers formula: E-e*sin(E)=M  (188)
+Calculate the Eccentricity anomaly E from the mean anomaly M, iteratively
+inversion of Keplers formula: E-e*sin(E)=M
+based on Grossman, N.: Orbits under the Inverse Square Law, in
+The Sheer Joy of Celestial Mechanics, edited by N. Grossman, pp. 41–61,
+Birkhäuser Boston, Boston, MA., 1996.
 }
 \author{
 Thomas Laepple

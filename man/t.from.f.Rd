@@ -4,7 +4,7 @@
 \alias{t.from.f}
 \title{days to true angle}
 \usage{
-\method{t}{from.f}(ecc, f)
+t.from.f(ecc, f)
 }
 \arguments{
 \item{ecc}{eccentricity}
@@ -15,10 +15,12 @@
 days from perihelion, calculated using the mean angle M
 }
 \description{
-based on
-Grossman; The sheer joy of celestial mechanics
-Orbits under the inverse square law
-book: (181)
+days to true angle
+}
+\references{
+Grossman, N.: Orbits under the Inverse Square Law, in
+The Sheer Joy of Celestial Mechanics, edited by N. Grossman, pp. 41–61,
+Birkhäuser Boston, Boston, MA., 1996.
 }
 \author{
 Thomas Laepple

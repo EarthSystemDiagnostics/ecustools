@@ -6,6 +6,9 @@
 \usage{
 LastElement(x)
 }
+\arguments{
+\item{x}{vector}
+}
 \value{
 last element of X
 }

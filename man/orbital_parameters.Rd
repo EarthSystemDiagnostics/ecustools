@@ -16,7 +16,10 @@ orbital_parameters(kyear,
 list(ecc=ecc,epsilon=epsilon,omega=omega)
 }
 \description{
-=== Load orbital parameters (given each kyr for 0-5Mya) ===
+Load the orbital parameters and return them for a given year
+}
+\details{
+Load orbital parameters (given each kyr for 0-5Mya) 
 Load the matrix contains data from Berger and Loutre (1991),
   downloaded as ORBIT91 from ncdc.noaa.gov
 }

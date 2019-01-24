@@ -15,10 +15,12 @@ f.from.t(ecc, t)
 true angle from perihelion (via the mean angle M)
 }
 \description{
-based on
-Grossman; The sheer joy of celestial mechanics
-Orbits under the inverse square law
-book: (181)
+true angle from days
+}
+\references{
+Grossman, N.: Orbits under the Inverse Square Law, in
+The Sheer Joy of Celestial Mechanics, edited by N. Grossman, pp. 41–61,
+Birkhäuser Boston, Boston, MA., 1996.
 }
 \author{
 Thomas Laepple
