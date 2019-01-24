@@ -15,7 +15,7 @@
 #' @export
 SimulateYearFromInsolation <- function(kyear = 0, transfer, latitude, bPolynomial = FALSE, 
                                        anomalyRef = NULL) {
-  insol <- (TLag(DailyInsolation(kyear, latitude, 1:365)$Fsw, transfer$lag))
+  insol <- TLag(DailyInsolation(kyear, latitude, 1:365)$Fsw, transfer$lag)
   
   if (bPolynomial) {
     
@@ -35,6 +35,20 @@ SimulateYearFromInsolation <- function(kyear = 0, transfer, latitude, bPolynomia
   if (!is.null(anomalyRef)) 
     result = result + anomalyRef
   return(result)
+}
+
+
+##' @title timelag with rolling over at 365 days
+##' @param data vector of values at 365 days
+##' @param ilag lag in days
+##' @return lagged values
+##' @author Thomas Laepple
+TLag <- function(data, ilag) {
+  
+  temp <- rep(data, 3)
+  
+  return(temp[366:730 - ilag])
+  
 }
 
 
