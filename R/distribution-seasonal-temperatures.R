@@ -18,22 +18,22 @@
 #'   0.01
 #' @name SeasonalCycle
 #' @author Andrew Dolman
-#' @examples 
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #' amp.t <- 10
 #' mean.t <- 25
 #' sd.t <- 0.75
-#' 
+#'
 #' x <- seq(mean.t-amp.t, mean.t+amp.t, length.out = 1000)
 #' Z <- rSeas(n = 100000, mean.t, amp.t, sd.t)
-#' 
+#'
 #' hist(Z, freq=F,breaks=100)
 #' lines(x, dSeas(x, mean.t, amp.t, sd.t, res = 0.1), col = "Blue")
 #' lines(x, dSeas(x, mean.t, amp.t, sd.t, res = 0.01), col = "Green")
 #' lines(x, dSeas(x, mean.t, amp.t, sd.t, res = 0.001), col = "Red")
 #'  }
-#' }
+#'
 NULL
 
 #' @rdname SeasonalCycle
@@ -42,32 +42,32 @@ dSeas <- function(x=NULL, mean.t, amp.t, sd.t, return = c("density", "FUN"), res
 
   rng <- max(c(amp.t, sd.t * 5))
   lnth <- (2 * rng) / res
-  
+
   # make vector length with many factors for fast FFT
   lnth2 <- (2 ^ ceiling(log(lnth, base = 2)))
-  
+
   if (lnth2 > 5000)  warning("Sequences to be convolved are very long,
                              decrease the resolution or rescale mean.t and amp.t")
-  
+
   # calculate new resolution for scaling
   res2 <- (2 * rng) / lnth2
-  
+
   xin <- seq(mean.t - rng, mean.t + rng, length.out = lnth2)
   zin <- dSin(xin, mean.t, amp.t)
   #plot(xin, zin, type = "l")
-  
+
   yin <- dnorm(xin, mean.t, sd.t)
   #plot(xin, yin, type = "l")
-  
+
   cv <- convolve(zin, yin, type = "open")
   cv <- cv / (sum(cv) * res2)
-  
+
   x2 <- seq(mean.t - 2 * rng, mean.t + 2 * rng, length.out = length(cv))
-  
+
   FUN <- approxfun(x2, cv, yleft = 0, yright = 0)
-  
+
   ret <- match.arg(return)
-  
+
   switch(ret,
          density = return(FUN(x)),
          FUN = return(FUN))
@@ -91,39 +91,12 @@ rSeas <- function(n, mean.t, amp.t, sd.t){
 #' @param amp.t amplitude of sine wave
 #' @return
 #' @export
-
 dSin <- function(x, mean.t, amp.t) {
   d <- rep(0, length(x))
-  
+
   # Do not evaluate where known to be NaN
   ind <- x > (mean.t - amp.t / 2) & x < (mean.t + amp.t / 2)
   d[ind] <- 1 / (pi * sqrt(1 - ((2 * x[ind]) / amp.t - (2 * mean.t) / amp.t) ^ 2))
-  
+
   2 * d / amp.t
 }
-
-
-
-# 
-#  dSeas(10, mean.t=mean.t, amp.t=amp.t, sd.t=sd.t, res = 0.01)
-# 
-#  f <-  dSeas(10, mean.t=mean.t, amp.t=amp.t, sd.t=sd.t, res = 0.01, return = "FUN")
-#  f(10)
-# 
-# mb <- microbenchmark::microbenchmark(
-#    dSeas(x, amp.t = amp.t, mean.t = mean.t, sd.t = sd.t, res = 1),
-#    dSeas(x, amp.t = amp.t, mean.t = mean.t, sd.t = sd.t, res = 0.1),
-#    dSeas(x, amp.t = amp.t, mean.t = mean.t, sd.t = sd.t, res = 0.01),
-#    dSeas(x, amp.t = amp.t, mean.t = mean.t, sd.t = sd.t, res = 0.001), times = 10L
-#     )
-# plot(mb)
-# mb
-# 
-# 
-# plot(x, dnorm(x, mean.t, sd.t), type = "l")
-# 
-# plot(x, pnorm(x, mean.t, sd.t), type = "l")
-# 
-# plot(1, qnorm(1, mean.t, sd.t), type = "l")
-
-

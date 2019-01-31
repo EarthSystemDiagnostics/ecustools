@@ -29,22 +29,6 @@ Takes a matrix or dataframe and calculates the pairwise
 Ideas for code taken from here:
   http://www.sthda.com/english/wiki/ggplot2-quick-correlation-matrix-heatmap-r-software-and-data-visualization
 }
-\examples{
-\dontrun{
-if(interactive()) {
-
-  M <- matrix(rnorm(12 * 100), ncol = 12)
-  PlotPairwiseCorrelations(M, axis.label = "Month",
-                           return.corr.tibble = TRUE)
-
-  # Add names to columns
-  colnames(M) <- letters[1:12]
-  PlotPairwiseCorrelations(M, axis.label = "Cat",
-                           return.corr.tibble = TRUE)
-
-}
-}
-}
 \author{
 Andrew Dolman
 }

@@ -23,6 +23,7 @@ ExpectedRange(5, 15)
 
 \dontrun{
 library(tidyverse)
+f <- function(x, n) n * x * pnorm(x)^(n - 1) * dnorm(x)
 ests <- expand.grid(mean = 0, sd = 2, n = 15, rep = 1:1000, i = 1:15) \%>\%
   mutate(rdv = rnorm(n(), mean, sd)) \%>\%
   group_by(mean, sd, n, rep) \%>\%
