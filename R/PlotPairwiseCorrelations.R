@@ -27,6 +27,7 @@
 #'                            return.corr.tibble = TRUE)
 #'
 #' }
+#' }
 #' @rdname CorrelationMatrix
 #' @export
 #' @importFrom dplyr mutate filter
