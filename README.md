@@ -1,11 +1,6 @@
 ecustools
 ================
 
-This package has moved to GitHub
-================================
-
-<https://github.com/EarthSystemDiagnostics/ecustools>
-
 A miscellaneous collection of R functions used in the ECUS group for working with time-series and paleo data.
 
 Many of these functions have been ported from the 'paleoLibrary' collection of R scripts.
