@@ -33,7 +33,7 @@
 #' lines(x, dSeas(x, mean.t, amp.t, sd.t, res = 0.01), col = "Green")
 #' lines(x, dSeas(x, mean.t, amp.t, sd.t, res = 0.001), col = "Red")
 #'  }
-#'
+#'}
 NULL
 
 #' @rdname SeasonalCycle
@@ -89,7 +89,6 @@ rSeas <- function(n, mean.t, amp.t, sd.t){
 #' Density of a scaled sin wave
 #' @param mean.t mean of sine wave
 #' @param amp.t amplitude of sine wave
-#' @return
 #' @export
 dSin <- function(x, mean.t, amp.t) {
   d <- rep(0, length(x))

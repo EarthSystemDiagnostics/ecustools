@@ -16,6 +16,9 @@ space.}
 \item{Xi}{An ni-by-d matrix. The rows of xi represent n points in
 d-dimensional space whose positions in the mesh are being sought.}
 }
+\value{
+matrix
+}
 \description{
 ND barycentric interpolation at points Xi for a function with values f
 measured at locations X

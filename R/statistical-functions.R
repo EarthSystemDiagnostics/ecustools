@@ -13,7 +13,12 @@
 #' @examples
 #' \dontrun{
 #' if(interactive()){
-#'  #EXAMPLE1
+#'  SDofSD(1, 12)
+#'  library(ggplot2)
+#' df <- expand.grid(SD = 1:10, n = seq(2, 10, length.out = 100))
+#' df$SDofSD = SDofSD(df$SD, df$n)
+#' ggplot(df, aes(x = n, y = SDofSD, group = SD, colour = SD)) +
+#'   geom_line()
 #'  }
 #' }
 #' @rdname SDofSD
@@ -91,10 +96,13 @@ SDofNumDist <- function(x, d){
 #' @details Calculation of the mode is naive. For a multimodal distribution only
 #' the highest is returned, in the case of 2 or more modes with exactly the same
 #'  probability, the first is returned.
-#' @return Returns a named vector with the mean, median, mode, and standard deviation of the empirical PDF
+#' @return Returns a named vector with the mean, median, mode, and standard
+#' deviation of the empirical PDF
 #' @export
-#'
 #' @examples
+#' df <- data.frame(x = 1:10)
+#' df$p <- dnorm(df$x, 5, 2)
+#' SummariseEmpiricalPDF(df$x, df$p)
 SummariseEmpiricalPDF <- function(x, p){
 
   # Ensure x and p are sorted

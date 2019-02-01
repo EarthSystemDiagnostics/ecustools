@@ -12,7 +12,8 @@ SummariseEmpiricalPDF(x, p)
 \item{p}{A vector of probabilities}
 }
 \value{
-Returns a named vector with the mean, median, mode, and standard deviation of the empirical PDF
+Returns a named vector with the mean, median, mode, and standard
+deviation of the empirical PDF
 }
 \description{
 Summarise an Empirical Probability Distribution Function.
@@ -21,4 +22,9 @@ Summarise an Empirical Probability Distribution Function.
 Calculation of the mode is naive. For a multimodal distribution only
 the highest is returned, in the case of 2 or more modes with exactly the same
  probability, the first is returned.
+}
+\examples{
+df <- data.frame(x = 1:10)
+df$p <- dnorm(df$x, 5, 2)
+SummariseEmpiricalPDF(df$x, df$p)
 }

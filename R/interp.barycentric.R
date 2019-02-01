@@ -10,7 +10,7 @@
 #'   https://dahtah.wordpress.com/2013/03/06/barycentric-interpolation-fast-interpolation-on-arbitrary-grids/
 #'
 #' @author Andrew Dolman <andrew.dolman@awi.de>
-#' @return
+#' @return matrix
 #' @import geometry Matrix
 #' @export
 #'

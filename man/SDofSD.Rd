@@ -28,7 +28,12 @@ if n <= 0 an exact method is used, otherwise Stirling's
 \examples{
 \dontrun{
 if(interactive()){
- #EXAMPLE1
+ SDofSD(1, 12)
+ library(ggplot2)
+df <- expand.grid(SD = 1:10, n = seq(2, 10, length.out = 100))
+df$SDofSD = SDofSD(df$SD, df$n)
+ggplot(df, aes(x = n, y = SDofSD, group = SD, colour = SD)) +
+  geom_line()
  }
 }
 }
