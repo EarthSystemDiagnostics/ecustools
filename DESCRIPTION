@@ -26,6 +26,8 @@ Imports:
     Runuran,
     raster,
     maptools,
+    geometry,
+    Matrix,
     orbitalforcing (>= 0.1)
 Remotes: 
     earthsystemdiagnostics/orbitalforcing
