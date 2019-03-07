@@ -24,10 +24,10 @@
 #' @rdname SDofSD
 #' @export
 SDofSD <- function(s, n) {
-  if (any(n < 2))
-    stop("n must be greater than or equal to 2")
-  if (any(s < 0))
-    stop("s must be >= 0")
+  if (any(n < 2, na.rm = TRUE))
+    warning("n must be greater than or equal to 2")
+  if (any(s < 0, na.rm = TRUE))
+    warning("s must be >= 0")
   if(length(s) > 1 & length(n)==1)
     n <- rep(n, length(s))
   if(length(n) > 1 & length(s)==1)
