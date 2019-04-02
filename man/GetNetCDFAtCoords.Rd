@@ -7,7 +7,11 @@
 GetNetCDFAtCoords(filename, req.coords, req.var, time.var = "time")
 }
 \arguments{
-\item{time.var}{}
+\item{req.coords}{matrix or dataframe of longitude and latitude coordinates}
+
+\item{req.var}{name of the variable to extract}
+
+\item{time.var}{name of the time variable}
 }
 \description{
 Extract timeseries for nearest coordinates from a netcdf file

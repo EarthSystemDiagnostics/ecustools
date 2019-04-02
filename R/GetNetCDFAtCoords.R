@@ -1,9 +1,9 @@
 #' Extract timeseries for nearest coordinates from a netcdf file
 #'
 #' @param filename
-#' @param req.coords
-#' @param req.var
-#' @param time.var
+#' @param req.coords matrix or dataframe of longitude and latitude coordinates
+#' @param req.var name of the variable to extract
+#' @param time.var name of the time variable
 #'
 #' @return
 #' @export
