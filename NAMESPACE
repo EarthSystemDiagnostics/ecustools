@@ -2,6 +2,7 @@
 
 export(AddHistory)
 export(AnnualInsolation)
+export(BarometricFormula)
 export(CalcifTemp)
 export(DailyInsolation)
 export(DailyInsolationParam)
