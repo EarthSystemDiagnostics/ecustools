@@ -30,6 +30,8 @@ Imports:
     geometry,
     Matrix,
     scales,
-    ggforce
+    ggforce,
+    rgeos,
+    mapproj
 Remotes: 
     earthsystemdiagnostics/orbitalforcing

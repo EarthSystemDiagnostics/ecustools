@@ -13,7 +13,7 @@
 #' @param nearest.x.degrees round latitude tickmarks to how many degrees?
 #' @param rotate if plotting a segement of < 360 degrees longitude, rotate plot
 #' so that north is up (or south is down)
-#' @import ggplot2 maptools
+#' @import ggplot2 maptools rgeos
 #' @importFrom raster crop extent
 #' @author Andrew Dolman <andrew.dolman@awi.de>
 #' @export
