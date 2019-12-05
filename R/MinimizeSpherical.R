@@ -33,51 +33,51 @@
 MinimizeSpherical <- function(lat0, lon0, lat, lon,
                               return.coordinates = FALSE) {
 
-    # Error checking
+  # Error checking
 
-    if (length(lat0) != length(lon0))
-        stop("'lat0' and 'lon0' must both have length 1.")
+  if (length(lat0) != length(lon0))
+    stop("'lat0' and 'lon0' must both have length 1.")
 
-    if (length(lat) != length(lon))
-        stop("'lat' and 'lon' must have equal length.")
+  if (length(lat) != length(lon))
+    stop("'lat' and 'lon' must have equal length.")
 
-    n <- length(lat)
+  n <- length(lat)
 
-    # Convert angles from degree to radian
+  # Convert angles from degree to radian
 
-    x <- deg2rad(lat0)
-    y <- deg2rad(lon0)
+  x <- deg2rad(lat0)
+  y <- deg2rad(lon0)
 
-    xx <- deg2rad(lat)
-    yy <- deg2rad(lon)
-    
-    # Convert input to vectors in spherical coordinates
+  xx <- deg2rad(lat)
+  yy <- deg2rad(lon)
+  
+  # Convert input to vectors in spherical coordinates
 
-    target <- c(cos(x) * cos(y),
-                cos(x) * sin(y),
-                sin(x))
+  target <- c(cos(x) * cos(y),
+              cos(x) * sin(y),
+              sin(x))
 
-    field.vectors <- rbind(cos(xx) * cos(yy),
-                           cos(xx) * sin(yy),
-                           sin(xx))
+  field.vectors <- rbind(cos(xx) * cos(yy),
+                         cos(xx) * sin(yy),
+                         sin(xx))
 
-    # Root mean square deviation between target and data position vectors
+  # Root mean square deviation between target and data position vectors
 
-    dev <- rep(NA, n)
-    for (i in 1 : n) {
+  dev <- rep(NA, n)
+  for (i in 1 : n) {
 
-        dev[i] <- rmsd(field.vectors[, i], target)
-    }
+    dev[i] <- rmsd(field.vectors[, i], target)
+  }
 
-    # Return index of the position vector with minimum deviation to target
+  # Return index of the position vector with minimum deviation to target
 
-    i <- which.min(dev)
+  i <- which.min(dev)
 
-    if (return.coordinates) {
-        res <- c(lat = lat[i], lon = lon[i])
-    } else {
-        res <- i
-    }
+  if (return.coordinates) {
+    res <- c(lat = lat[i], lon = lon[i])
+  } else {
+    res <- i
+  }
 
-    return(res)
+  return(res)
 }

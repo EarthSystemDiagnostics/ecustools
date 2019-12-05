@@ -11,6 +11,6 @@
 #' deg2rad(deg2rad(-75), inverse = TRUE)
 #' @export
 deg2rad <- function(x, inverse = FALSE) {
-    f <- ifelse(inverse, 180 / pi, pi / 180)
-    f * x
+  f <- ifelse(inverse, 180 / pi, pi / 180)
+  f * x
 }

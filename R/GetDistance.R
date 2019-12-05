@@ -50,50 +50,48 @@
 GetDistance <- function(lat0, lon0, lat, lon,
                         get.nearest = FALSE, verbose = FALSE) {
 
-    # Error checking
+  # Error checking
 
-    if (length(lat0) != length(lon0))
-        stop("'lat0' and 'lon0' must both have length 1.")
+  if (length(lat0) != length(lon0))
+    stop("'lat0' and 'lon0' must both have length 1.")
 
-    if (length(lat) != length(lon))
-        stop("'lat' and 'lon' must have equal length.")
+  if (length(lat) != length(lon))
+    stop("'lat' and 'lon' must have equal length.")
 
-    # Select target point based on input
+  # Select target point based on input
+
+  if (get.nearest) {
+
+    # get lat, lon of nearest point relative to target
+    point <- rev(MinimizeSpherical(lat0, lon0, lat, lon,
+                                   return.coordinates = TRUE))
     
-    if (get.nearest) {
-
-        # get lat, lon of nearest point relative to target
-        point <- rev(MinimizeSpherical(lat0, lon0, lat, lon,
-                                       return.coordinates = TRUE))
-        
-        if (verbose) {
-            message(sprintf(
-              "Nearest grid point used as target: lat0 = %f, lon0 = %f.",
-              point[2], point[1]))
-        }
-
-        
-
-    } else {
-
-        if (verbose) message("Using supplied 'lat0' and 'lon0' value as target.")
-        point <- c(lon0, lat0)
+    if (verbose) {
+      message(sprintf(
+        "Nearest grid point used as target: lat0 = %f, lon0 = %f.",
+        point[2], point[1]))
     }
 
-    # Shape coordinates of field in appropriate structure for 'distGeo' function
+  } else {
 
-    field.coord <- rbind(lon, lat)
+    if (verbose) message("Using supplied 'lat0' and 'lon0' value as target.")
+    point <- c(lon0, lat0)
+  }
 
-    # Need to put longitudes in [-180, 180] for 'distGeo' function
+  # Shape coordinates of field in appropriate structure for 'distGeo' function
 
-    point[point >= 180] <- point[point >= 180] - 360
-    field.coord[field.coord >= 180] <- field.coord[field.coord >= 180] - 360
+  field.coord <- rbind(lon, lat)
 
-    # Get distance field
-    distance <- apply(field.coord, 2, geosphere::distGeo, p2 = point)
+  # Need to put longitudes in [-180, 180] for 'distGeo' function
 
-    # Convert to km
-    distance <- distance / 10^3
+  point[point >= 180] <- point[point >= 180] - 360
+  field.coord[field.coord >= 180] <- field.coord[field.coord >= 180] - 360
 
-    return(distance)
+  # Get distance field
+  distance <- apply(field.coord, 2, geosphere::distGeo, p2 = point)
+
+  # Convert to km
+  distance <- distance / 10^3
+
+  return(distance)
 }
