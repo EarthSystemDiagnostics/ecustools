@@ -67,16 +67,16 @@ GetDistance <- function(lat0, lon0, lat, lon,
                                        return.coordinates = TRUE))
         
         if (verbose) {
-            message(
-                sprintf("Nearest grid point used: lat = %f, lon = %f.",
-                        point[2], point[1]))
+            message(sprintf(
+              "Nearest grid point used as target: lat0 = %f, lon0 = %f.",
+              point[2], point[1]))
         }
 
         
 
     } else {
 
-        if (verbose) message("Using supplied 'lat' and 'lon' value.")
+        if (verbose) message("Using supplied 'lat0' and 'lon0' value as target.")
         point <- c(lon0, lat0)
     }
 
