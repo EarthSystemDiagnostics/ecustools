@@ -32,6 +32,7 @@ Imports:
     scales,
     ggforce,
     rgeos,
-    mapproj
+    mapproj,
+    geosphere
 Remotes: 
     earthsystemdiagnostics/orbitalforcing
