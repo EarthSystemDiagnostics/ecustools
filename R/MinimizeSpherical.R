@@ -2,13 +2,15 @@
 #'
 #' This function finds the position in a latitude/longitude field that is
 #' closest to a given target position by minimizing the root mean square
-#' deviation between their position vectors in spherical coordinates.
-#' @param lat0 a length-1 vector with the latitude of the target position.
-#' @param lon0 a length-1 vector with the longitude of the target position.
-#' @param lat numeric vector of latitudes from a field of coordinates for which
-#' the point closest to the target is to be determined.
-#' @param lon numeric vector of longitudes from a field of coordinates for
-#' which the point closest to the target is to be determined. Must have the
+#' deviation of their position vectors in spherical coordinates.
+#' @param lat0 a length-1 vector with the latitude [degree] of the target
+#' position.
+#' @param lon0 a length-1 vector with the longitude [degree] of the target
+#' position.
+#' @param lat numeric vector of latitudes [degree] from a field of coordinates
+#' for which the point closest to the target is to be determined.
+#' @param lon numeric vector of longitudes [degree] from a field of coordinates
+#' for which the point closest to the target is to be determined. Must have the
 #' same length as \code{lat}.
 #' @param return.coordinates logical; shall the actual coordinates of the
 #' position closest to the target be returned? Defaults to \code{FALSE}, which

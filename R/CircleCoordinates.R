@@ -1,10 +1,10 @@
-#' Circle coordinates
+#' Circle coordinates on a sphere
 #'
 #' Get the latitude and longitude coordinates of a circle with a given radius
 #' drawn onto the surface of a sphere.
 #'
-#' @param lat0 latitude of circle centre.
-#' @param lon0 longitude of circle centre.
+#' @param lat0 geographical latitude [degree] of circle centre.
+#' @param lon0 geographical longitude [degree] of circle centre.
 #' @param radius.circle radius of the circle; in the same units as
 #' \code{radius.sphere}.
 #' @param radius.sphere radius of the sphere on whose surface the circle is
@@ -16,8 +16,9 @@
 #' @param return.pi.interval if \code{TRUE}, return the circle's longitudes in
 #' the interval [-pi, pi]; else in [0, 2*pi].
 #' @return data frame of circle latitude (\code{lat}) and longitudes
-#' (\code{lon}) in geographical coordinates for the number of incremental steps
-#' specified by \code{n} (given as the angular coordinate \code{phi}).
+#' (\code{lon}) in geographical coordinates in degree for the number of
+#' incremental steps specified by \code{n} (given as the polar coordinate
+#' \code{phi}).
 #' @author Thomas Münch
 #' @export
 CircleCoordinates <- function(lat0, lon0, radius.circle,

@@ -5,14 +5,15 @@
 #' straighforward interface to the function \code{\link[geosphere]{distGeo}}
 #' from package \code{geosphere}.
 #'
-#' The purpose of this function is to provide a straighforward interface to the
-#' function \code{\link[geosphere]{distGeo}}; this includes:
-#'   * direct input of latitude/longitude values which are then shaped into the
-#'     appropriate structure for \code{\link[geosphere]{distGeo}};
-#'   * longitude values are automatically confined to [-180, 180] as needed by
-#'     \code{\link[geosphere]{distGeo}};
-#'   * if required, one can select the point closest to the target location as
-#'     the reference for the distance calculations. 
+#' This is a wrapper function whose purpose it is to provide a straighforward
+#' interface to the function \code{\link[geosphere]{distGeo}}; this includes:
+#' \itemize{
+#' \item direct input of latitude/longitude values which are then shaped into
+#'       the appropriate structure for \code{\link[geosphere]{distGeo}};
+#' \item longitude values are automatically confined to [-180, 180] as needed by
+#'       \code{\link[geosphere]{distGeo}};
+#' \item if required, one can select the point closest to the target location as
+#'       the reference for the distance calculations.}
 #' @param lat0 numeric vector of length 1 with the latitude (in degree) of the
 #' target location relative to which distances are to be calculated.
 #' @param lon0 numeric vector of length 1 with the longitude (in degree) of the
@@ -32,7 +33,7 @@
 #' @return Numeric vector of the same length as \code{lat} with the distances
 #' in km from the target location.
 #' @author Thomas Münch
-#' @seealso \code{\link{GetDistanceField}}
+#' @seealso \code{\link[pfields]{GetDistanceField}}
 #' @examples
 #' # some coordinates
 #' lat0 <- -75
