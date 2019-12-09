@@ -17,6 +17,9 @@
 #' DistAB(0,-75,c(0,1,2,3),c(-76,-75,-74,-73))
 #' @export
 DistAB <- function(lon,lat,lons,lats) {
+  warning(paste("'DistAB()' is deprecated and will be removed soon.",
+                "Use 'GetDistance()' or 'geosphere::distGeo()' instead."),
+          call. = FALSE)
   a=6.378e06
   good <- is.finite(lons) & is.finite(lats)
   lons <- lons[good]
