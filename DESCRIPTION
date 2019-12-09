@@ -37,5 +37,4 @@ Imports:
     mapproj,
     geosphere
 Remotes: 
-    earthsystemdiagnostics/pfields,
     earthsystemdiagnostics/orbitalforcing
