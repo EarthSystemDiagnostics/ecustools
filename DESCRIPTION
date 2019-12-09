@@ -13,9 +13,11 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
-Suggests: ncdf4,
+Suggests:
+    ncdf4,
     knitr,
-    rmarkdown
+    rmarkdown,
+    pfields
 VignetteBuilder: knitr
 Imports: 
     tibble,
@@ -35,4 +37,5 @@ Imports:
     mapproj,
     geosphere
 Remotes: 
+    earthsystemdiagnostics/pfields,
     earthsystemdiagnostics/orbitalforcing

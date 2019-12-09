@@ -16,7 +16,12 @@ ReadFraile <- function(FILENAME, varname){
 
   if (!requireNamespace("ncdf4", quietly = TRUE)) {
     stop("package 'ncdf4' is needed for this function to work. Please install it.",
-         call. = FALSE)}
+         call. = FALSE)
+  }
+  if (!requireNamespace("pfields", quietly = TRUE)) {
+    stop(paste("package 'pfields' is needed for this function to work.",
+               "Please install it."), call. = FALSE)
+  }
 
   temp.nc <- ncdf4::nc_open(FILENAME)
 
@@ -37,8 +42,8 @@ ReadFraile <- function(FILENAME, varname){
 
   nc_close(temp.nc)
 
-  return(pField(temp.data, temp.time, lat = temp.lat, lon = temp.lon,
-                name = varname, history = FILENAME))
+  return(pfields::pField(temp.data, temp.time, lat = temp.lat, lon = temp.lon,
+                         name = varname, history = FILENAME))
 }
 read_fraile <- function(...){
   warning("read_fraile is deprecated and replaced with ReadFraile
