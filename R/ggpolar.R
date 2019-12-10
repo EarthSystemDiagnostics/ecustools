@@ -13,6 +13,8 @@
 #' @param nearest.x.degrees round latitude tickmarks to how many degrees?
 #' @param rotate if plotting a segement of < 360 degrees longitude, rotate plot
 #' so that north is up (or south is down)
+#' @param data.layer optional ggplot2 layer of data onto which the polar map
+#' shall be plotted. Defaults to \code{NULL} which only plots the map.
 #' @import ggplot2 maptools rgeos
 #' @importFrom raster crop extent
 #' @author Andrew Dolman <andrew.dolman@awi.de>
@@ -59,7 +61,8 @@ ggpolar <- function(pole = c("N", "S"),
                     longitude.spacing = 60,
                     land.fill.colour = "Grey",
                     country.outline.colour = "Black",
-                    n.lat.labels = 4, nearest.x.degrees = 5, rotate = FALSE) {
+                    n.lat.labels = 4, nearest.x.degrees = 5, rotate = FALSE,
+                    data.layer = NULL) {
 
   pole <- match.arg(pole, choices = c("N", "S"))
 
@@ -129,7 +132,13 @@ ggpolar <- function(pole = c("N", "S"),
                               raster::extent(min.lon, max.lon, min.lat, max.lat),
                               snap = "in")
 
-  p <- ggplot() +
+  if (!length(data.layer)) {
+    p <- ggplot()
+  } else {
+    p <- data.layer
+  }
+
+  p <- p +
 
     # Plot map outline and project to polar coordinates
     geom_polygon(data = map.outline, aes(x = long, y = lat, group = group),
