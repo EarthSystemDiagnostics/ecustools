@@ -111,8 +111,8 @@ ggpolar <- function(pole = c("N", "S"),
   }
 
   lat.ax.vals <- lat.ax.vals[abs(lat.ax.vals) != 90]
-  lat.ax.labs <- paste0(lat.ax.vals, "°", ifelse(lat.ax.vals <
-                                                   0, " S", " N"))
+  lat.ax.labs <- paste0(ifelse(lat.ax.vals < 0, -lat.ax.vals, lat.ax.vals),
+                        "°", ifelse(lat.ax.vals < 0, " S", " N"))
 
   # Defines the x axes required
   long.ax.vals <- seq(min.lon, max.lon, by = longitude.spacing)
