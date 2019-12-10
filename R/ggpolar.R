@@ -9,6 +9,8 @@
 #' @param min.lon minimum longitude
 #' @param longitude.spacing interval between longitude axis tick marks
 #' @param land.fill.colour colour to shade the land
+#' @param country.outline.colour colour for political boundaries (default
+#' "Black"); set to the same as \code{land.fill.colour} to hide them.
 #' @param n.lat.labels approximate number of latitude tickmarks
 #' @param nearest.x.degrees round latitude tickmarks to how many degrees?
 #' @param rotate if plotting a segement of < 360 degrees longitude, rotate plot
@@ -57,7 +59,7 @@
 #' }
 ggpolar <- function(pole = c("N", "S"),
                     max.lat, min.lat,
-                    min.lon = -180, max.lon = 180,
+                    max.lon = 180, min.lon = -180,
                     longitude.spacing = 60,
                     land.fill.colour = "Grey",
                     country.outline.colour = "Black",
