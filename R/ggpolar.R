@@ -65,6 +65,7 @@ ggpolar <- function(pole = c("N", "S"),
                     country.outline.colour = "Black",
                     n.lat.labels = 4, nearest.x.degrees = 5, rotate = FALSE,
                     size.outer = 1,
+                    ax.labs.size = 4,
                     data.layer = NULL) {
 
   pole <- match.arg(pole, choices = c("N", "S"))
@@ -165,7 +166,8 @@ ggpolar <- function(pole = c("N", "S"),
     geom_segment(aes(y = long.line.strt, yend = long.line.end,
                      x = long.ax.vals, xend = long.ax.vals), linetype = "dashed",
                  colour = "black", size = 0.25) +
-    geom_text(aes(x = long.ax.vals, y = long.lab.pos.2, label = long.ax.labs)) +
+    geom_text(aes(x = long.ax.vals, y = long.lab.pos.2, label = long.ax.labs),
+              size = ax.labs.size) +
 
     # Outer latitude axis
     geom_line(aes(y = outer.lat.ax.val, x = min.lon : max.lon), size = size.outer,
@@ -177,6 +179,7 @@ ggpolar <- function(pole = c("N", "S"),
     # Lat axis labels
     geom_label(aes(x = mean.lon, y = lat.ax.vals, label = lat.ax.labs),
                #hjust = -0.2,
+               size = ax.labs.size,
                alpha = 0.75, label.size = 0) +
 
     # Change theme to remove panel backgound
