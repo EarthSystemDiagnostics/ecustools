@@ -67,7 +67,7 @@ ggpolar <- function(pole = c("N", "S"),
                     size.outer = 1,
                     plt.lat.axes = TRUE, plt.lat.labels = plt.lat.axes,
                     plt.lon.axes = TRUE, plt.lon.labels = plt.lon.axes,
-                    ax.labs.size = 4,
+                    lat.ax.labs.pos = NULL, ax.labs.size = 4,
                     data.layer = NULL) {
 
   pole <- match.arg(pole, choices = c("N", "S"))
@@ -179,7 +179,11 @@ ggpolar <- function(pole = c("N", "S"),
   # Lat axis labels
   if (plt.lat.labels) {
 
-    p <- p + geom_label(aes(x = mean.lon,
+    if (!length(lat.ax.labs.pos)) {
+      lat.ax.labs.pos <- mean.lon
+    }
+
+    p <- p + geom_label(aes(x = lat.ax.labs.pos,
                             y = lat.ax.vals,
                             label = lat.ax.labs),
                         #hjust = -0.2,
