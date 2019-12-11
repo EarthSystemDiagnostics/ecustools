@@ -65,6 +65,8 @@ ggpolar <- function(pole = c("N", "S"),
                     country.outline.colour = "Black",
                     n.lat.labels = 4, nearest.x.degrees = 5, rotate = FALSE,
                     size.outer = 1,
+                    plt.lat.axes = TRUE, plt.lat.labels = plt.lat.axes,
+                    plt.lon.axes = TRUE, plt.lon.labels = plt.lon.axes,
                     ax.labs.size = 4,
                     data.layer = NULL) {
 
@@ -159,31 +161,48 @@ ggpolar <- function(pole = c("N", "S"),
     scale_x_continuous("", breaks = NULL) +
     scale_y_continuous("", breaks = NULL) +
 
-    # Add axes and labels
-
-
-    # Longitude axis lines and labels
-    geom_segment(aes(y = long.line.strt, yend = long.line.end,
-                     x = long.ax.vals, xend = long.ax.vals), linetype = "dashed",
-                 colour = "black", size = 0.25) +
-    geom_text(aes(x = long.ax.vals, y = long.lab.pos.2, label = long.ax.labs),
-              size = ax.labs.size) +
-
     # Outer latitude axis
     geom_line(aes(y = outer.lat.ax.val, x = min.lon : max.lon), size = size.outer,
               colour = "black") +
 
-    # Lat axis lines
-    geom_line(data = lat.lines, aes(y = lat, x = long, group = lat),
-              size = 0.25, linetype = "dashed", colour = "black") +
-    # Lat axis labels
-    geom_label(aes(x = mean.lon, y = lat.ax.vals, label = lat.ax.labs),
-               #hjust = -0.2,
-               size = ax.labs.size,
-               alpha = 0.75, label.size = 0) +
-
     # Change theme to remove panel backgound
     theme(panel.background = element_blank())
+
+
+  # Add axes and labels
+
+  # Lat axis lines
+  if (plt.lat.axes) {
+    p <- p + geom_line(data = lat.lines, aes(y = lat, x = long, group = lat),
+                       size = 0.25, linetype = "dashed", colour = "black")
+  }
+  # Lat axis labels
+  if (plt.lat.labels) {
+
+    p <- p + geom_label(aes(x = mean.lon,
+                            y = lat.ax.vals,
+                            label = lat.ax.labs),
+                        #hjust = -0.2,
+                        size = ax.labs.size,
+                        alpha = 0.75, label.size = 0)
+  }
+
+  # Longitude axis lines
+  if (plt.lon.axes) {
+
+    p <- p + geom_segment(aes(y = long.line.strt, yend = long.line.end,
+                              x = long.ax.vals, xend = long.ax.vals),
+                          linetype = "dashed", colour = "black", size = 0.25)
+  }
+  # Longitude axis labels
+  if (plt.lon.labels) {
+
+    p <- p + geom_text(aes(x = long.ax.vals,
+                           y = long.lab.pos.2,
+                           label = long.ax.labs),
+                       size = ax.labs.size)
+
+  }
 
   # If segment add lines to edge
   if (is.segment){
