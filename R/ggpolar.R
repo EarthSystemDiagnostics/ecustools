@@ -64,6 +64,7 @@ ggpolar <- function(pole = c("N", "S"),
                     land.fill.colour = "Grey",
                     country.outline.colour = "Black",
                     n.lat.labels = 4, nearest.x.degrees = 5, rotate = FALSE,
+                    size.outer = 1,
                     data.layer = NULL) {
 
   pole <- match.arg(pole, choices = c("N", "S"))
@@ -166,8 +167,8 @@ ggpolar <- function(pole = c("N", "S"),
                  colour = "black", size = 0.25) +
     geom_text(aes(x = long.ax.vals, y = long.lab.pos.2, label = long.ax.labs)) +
 
-    # Outer longitude axis
-    geom_line(aes(y = outer.lat.ax.val, x = min.lon:max.lon), size = 1,
+    # Outer latitude axis
+    geom_line(aes(y = outer.lat.ax.val, x = min.lon : max.lon), size = size.outer,
               colour = "black") +
 
     # Lat axis lines
@@ -185,7 +186,7 @@ ggpolar <- function(pole = c("N", "S"),
   if (is.segment){
     p <- p + geom_segment(aes(y = long.line.strt, yend = long.line.end,
                               x = c(min.lon, max.lon), xend = c(min.lon, max.lon)),
-                          colour = "black", size = 1)
+                          colour = "black", size = size.outer)
   }
 
   p
