@@ -1,25 +1,43 @@
-#' @title Nicely formatted polar ggplot
-#' @description Produce a nicely formatted maps of the Arctic or Antarctic in
-#' polar projection. Also works for longitudinal segements, e.g. just Greenland.
-#' Adapted from Mikey Harper's plot https://stackoverflow.com/a/49084793
-#' @param pole which pole N or S?
-#' @param max.lat maximum latitude
-#' @param min.lat minimum latitude
-#' @param max.lon maximum longitude
-#' @param min.lon minimum longitude
-#' @param longitude.spacing interval between longitude axis tick marks
-#' @param land.fill.colour colour to shade the land
+#' Nicely formatted polar ggplot
+#'
+#' Produce nicely formatted maps of the Arctic or Antarctic in polar
+#' projection. Also works for longitudinal segments, e.g. just Greenland.
+#'
+#' @param pole character; which pole: "N" or "S"?
+#' @param max.lat maximum latitude.
+#' @param min.lat minimum latitude.
+#' @param max.lon maximum longitude.
+#' @param min.lon minimum longitude.
+#' @param longitude.spacing interval between longitude axis tick marks.
+#' @param land.fill.colour colour to shade the land.
 #' @param country.outline.colour colour for political boundaries (default
-#' "Black"); set to the same as \code{land.fill.colour} to hide them.
-#' @param n.lat.labels approximate number of latitude tickmarks
+#'   "Black"); set to the same as \code{land.fill.colour} to hide them.
+#' @param n.lat.labels approximate number of latitude tickmarks.
 #' @param nearest.x.degrees round latitude tickmarks to how many degrees?
-#' @param rotate if plotting a segement of < 360 degrees longitude, rotate plot
-#' so that north is up (or south is down)
+#' @param rotate logical; if plotting a segment of < 360 degrees longitude,
+#'   rotate the plot so that north is up (or south is down) as seen from the
+#'   mean longitude of the segment.
+#' @param size.outer size of the outer longitude circle and, if plotting a
+#'   segment, of the outer latitude lines.
+#' @param plt.lat.axes logical; shall latitude axes be plotted?
+#' @param plt.lat.labels logical; shall latitude labels be plotted? Per default
+#'   set to the value of \code{plt.lat.axes}.
+#' @param plt.lon.axes logical; shall longitude axes be plotted?
+#' @param plt.lon.labels logical; shall longitude labels be plotted? Per default
+#'   set to the value of \code{plt.lon.axes}.
+#' @param lat.ax.labs.pos longitudinal positions of the latitude axis
+#'   labels. Per default, the labels are placed at 0 E (180 W) for north (south)
+#'   polar plots or at the mean longitude of a segment; use this parameter to
+#'   override the default setting.
+#' @param ax.labs.size size of latitude and longitude axis labels.
 #' @param data.layer optional ggplot2 layer of data onto which the polar map
-#' shall be plotted. Defaults to \code{NULL} which only plots the map.
+#'   shall be plotted. Defaults to \code{NULL} which only plots the map.
 #' @import ggplot2 maptools rgeos
 #' @importFrom raster crop extent
-#' @author Andrew Dolman <andrew.dolman@awi.de>
+#' @author Andrew Dolman <andrew.dolman@awi.de> with some modifications by
+#'   Thomas Münch.
+#' @source Adapted from Mikey Harper's plot; see
+#'   https://stackoverflow.com/a/49084793.
 #' @export
 #' @examples
 #' ggpolar(pole = "N", max.lat = 90, min.lat = 55, n.lat.labels = 4)
