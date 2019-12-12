@@ -136,6 +136,14 @@ ggpolar <- function(pole = c("N", "S"),
 
   lat.lines <- expand.grid(long = min.lon:max.lon, lat = lat.ax.vals)
 
+  # Define rotation angle for longitude labels
+  if (pole == "N") {
+    long.ax.lab.rotation <- long.ax.vals - 180 - rotate.to
+    if (is.segment) long.ax.lab.rotation <- long.ax.lab.rotation + 180
+  } else {
+    long.ax.lab.rotation <- -long.ax.vals + rotate.to
+  }
+
   # Get map outline and crop
   if (is.segment | pole == "N") {
 
@@ -217,7 +225,8 @@ ggpolar <- function(pole = c("N", "S"),
 
     p <- p + geom_text(aes(x = long.ax.vals,
                            y = long.lab.pos.2,
-                           label = long.ax.labs),
+                           label = long.ax.labs,
+                           angle = long.ax.lab.rotation),
                        size = ax.labs.size)
 
   }
