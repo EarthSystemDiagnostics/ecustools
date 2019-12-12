@@ -70,6 +70,9 @@ ggpolar <- function(pole = c("N", "S"),
                     lat.ax.labs.pos = NULL, ax.labs.size = 4,
                     data.layer = NULL) {
 
+  # force to repair invalid geometries
+  rgeos::set_RGEOS_CheckValidity(2L)
+
   pole <- match.arg(pole, choices = c("N", "S"))
 
   if (pole == "N" & max.lat < 0) stop("If pole == N, max.lat should be positive")
