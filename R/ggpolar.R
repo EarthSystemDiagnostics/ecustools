@@ -86,11 +86,12 @@ ggpolar <- function(pole = c("N", "S"),
   mean.lon <- mean(c(min.lon, max.lon))
 
   # if not a segment
-  if ((min.lon == -180 & max.lon == 180)){
+  if (!is.segment) {
     mean.lon <- 180
   }
 
-  if (rotate) {rotate.to <- mean.lon} else {rotate.to <- 0}
+  rotate.to <- 0
+  if (rotate & is.segment) {rotate.to <- mean.lon}
 
   lat.range <- abs(max.lat - min.lat)
   d.lat.ax.vals <- nearest.x.degrees * round((max.lat - min.lat)/n.lat.labels/nearest.x.degrees)
