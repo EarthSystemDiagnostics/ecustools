@@ -87,7 +87,7 @@ ggpolar <- function(pole = c("N", "S"),
 
   # if not a segment
   if (!is.segment) {
-    mean.lon <- 180
+    mean.lon <- ifelse(pole == "N", 0, 180)
   }
 
   rotate.to <- 0
