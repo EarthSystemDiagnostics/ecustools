@@ -133,10 +133,20 @@ ggpolar <- function(pole = c("N", "S"),
   lat.lines <- expand.grid(long = min.lon:max.lon, lat = lat.ax.vals)
 
   # Get map outline and crop
-  data("wrld_simpl", package = "maptools")
-  map.outline <- raster::crop(wrld_simpl,
-                              raster::extent(min.lon, max.lon, min.lat, max.lat),
-                              snap = "in")
+  if (is.segment | pole == "N") {
+
+    data("wrld_simpl", package = "maptools")
+    map.outline <- raster::crop(wrld_simpl,
+                                raster::extent(min.lon, max.lon, min.lat, max.lat),
+                                snap = "in")
+  } else {
+
+    # use different map source for south polar full longitude plot
+    # to circumvent buggy line at 180 deg W
+    map.outline <- map_data("world", "Antarctica")
+    i <- which(map.outline$lat >= min.lat & map.outline$lat <= max.lat)
+    map.outline <- map.outline[i, ]
+  }
 
   if (!length(data.layer)) {
     p <- ggplot()
