@@ -5,7 +5,7 @@
 #' @description Custom axis transformation function
 #' @param base base for the log transformation, Default: exp(1)
 #' @seealso
-#'  \code{\link[scales]{trans_new}},\code{\link[scales]{log_breaks}}
+#'  \code{\link[scales]{trans_new}},\code{\link[scales]{breaks_log}}
 #' @rdname reverselog_trans
 #' @source https://stackoverflow.com/a/11054781/1198125
 #' @export
@@ -17,7 +17,6 @@ reverselog_trans <- function(base = exp(1)) {
                     scales::log_breaks(base = base),
                     domain = c(1e-100, Inf))
 }
-
 
 
 

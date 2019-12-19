@@ -16,5 +16,5 @@ reverselog_trans(base = exp(1))
 Custom axis transformation function
 }
 \seealso{
-\code{\link[scales]{trans_new}},\code{\link[scales]{log_breaks}}
+\code{\link[scales]{trans_new}},\code{\link[scales]{breaks_log}}
 }
