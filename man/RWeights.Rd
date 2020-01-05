@@ -18,8 +18,8 @@ vector of n random numbers between 1 and length(weights)
 Draw random number between 1 and length(weights) with the distribution
 }
 \examples{
-weights <- c(rep(1,10),1:10,10:1)
-hist(RWeights(100000,weights),breaks=501)
+weights <- c(rep(1,10), 1:10, 10:1)
+hist(RWeights(100000, weights), breaks = 501)
 }
 \author{
 Thomas Laepple
