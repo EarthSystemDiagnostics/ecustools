@@ -9,7 +9,7 @@ facet_wrap_paginate_auto(ggplot.obj, facets, nrow, ncol)
 \arguments{
 \item{ggplot.obj}{A ggplot object}
 
-\item{facets}{Faceting formula, see \code{\link{ggplot2::facet_wrap}}}
+\item{facets}{Faceting formula, see \code{\link[ggplot2]{facet_wrap}}}
 
 \item{nrow}{number of columns per page}
 

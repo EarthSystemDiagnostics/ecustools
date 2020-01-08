@@ -3,7 +3,6 @@
 \docType{package}
 \name{ecustools}
 \alias{ecustools}
-\alias{ecustools-package}
 \title{ecustools.}
 \description{
 ecustools.

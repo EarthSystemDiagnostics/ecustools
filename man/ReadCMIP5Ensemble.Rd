@@ -4,10 +4,16 @@
 \alias{ReadCMIP5Ensemble}
 \title{Read the multimodel-ensemble of CMIP5 climate model data.}
 \usage{
-ReadCMIP5Ensemble(path = "", bFullEnsemble = TRUE,
-  METAFILE = paste(path, "filelist.txt", sep = ""), DATADIR = path,
-  PREFIX = "tas_Amon_", MIDDLE = "_historical_", SUFFIX = ".nc",
-  varname = "tas")
+ReadCMIP5Ensemble(
+  path = "",
+  bFullEnsemble = TRUE,
+  METAFILE = paste(path, "filelist.txt", sep = ""),
+  DATADIR = path,
+  PREFIX = "tas_Amon_",
+  MIDDLE = "_historical_",
+  SUFFIX = ".nc",
+  varname = "tas"
+)
 }
 \arguments{
 \item{path}{, [optional] path of the METAFILE named filelist.txt}

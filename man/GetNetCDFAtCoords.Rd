@@ -13,6 +13,9 @@ GetNetCDFAtCoords(filename, req.coords, req.var, time.var = "time")
 
 \item{time.var}{name of the time variable}
 }
+\value{
+
+}
 \description{
 Extract timeseries for nearest coordinates from a netcdf file
 }

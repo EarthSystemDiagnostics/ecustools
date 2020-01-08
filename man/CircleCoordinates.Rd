@@ -4,8 +4,14 @@
 \alias{CircleCoordinates}
 \title{Circle coordinates on a sphere}
 \usage{
-CircleCoordinates(lat0, lon0, radius.circle, radius.sphere = 6357,
-  n = 100, return.pi.interval = FALSE)
+CircleCoordinates(
+  lat0,
+  lon0,
+  radius.circle,
+  radius.sphere = 6357,
+  n = 100,
+  return.pi.interval = FALSE
+)
 }
 \arguments{
 \item{lat0}{geographical latitude [degree] of circle centre.}

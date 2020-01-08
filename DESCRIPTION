@@ -24,7 +24,6 @@ Imports:
     dplyr,
     tidyr,
     ggplot2,
-    ncdf4,
     raster,
     maptools,
     orbitalforcing (>= 0.1),
@@ -34,7 +33,7 @@ Imports:
     ggforce,
     rgeos,
     mapproj,
-    geosphere,
-    Bchron
+    geosphere
 Remotes: 
-    earthsystemdiagnostics/orbitalforcing
+    earthsystemdiagnostics/orbitalforcing,
+    earthsystemdiagnostics/pfields

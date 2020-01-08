@@ -6,8 +6,7 @@
 \alias{rSeas}
 \title{Distribution of temperatures in seasonal cycle}
 \usage{
-dSeas(x = NULL, mean.t, amp.t, sd.t, return = c("density", "FUN"),
-  res = 0.01)
+dSeas(x = NULL, mean.t, amp.t, sd.t, return = c("density", "FUN"), res = 0.01)
 
 rSeas(n, mean.t, amp.t, sd.t)
 }

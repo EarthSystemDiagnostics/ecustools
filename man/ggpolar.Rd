@@ -8,13 +8,27 @@ Adapted from Mikey Harper's plot; see
   https://stackoverflow.com/a/49084793.
 }
 \usage{
-ggpolar(pole = c("N", "S"), max.lat, min.lat, max.lon = 180,
-  min.lon = -180, longitude.spacing = 60, land.fill.colour = "Grey",
-  country.outline.colour = "Black", n.lat.labels = 4,
-  nearest.x.degrees = 5, rotate = FALSE, size.outer = 1,
-  plt.lat.axes = TRUE, plt.lat.labels = plt.lat.axes,
-  plt.lon.axes = TRUE, plt.lon.labels = plt.lon.axes,
-  lat.ax.labs.pos = NULL, ax.labs.size = 4, data.layer = NULL)
+ggpolar(
+  pole = c("N", "S"),
+  max.lat,
+  min.lat,
+  max.lon = 180,
+  min.lon = -180,
+  longitude.spacing = 60,
+  land.fill.colour = "Grey",
+  country.outline.colour = "Black",
+  n.lat.labels = 4,
+  nearest.x.degrees = 5,
+  rotate = FALSE,
+  size.outer = 1,
+  plt.lat.axes = TRUE,
+  plt.lat.labels = plt.lat.axes,
+  plt.lon.axes = TRUE,
+  plt.lon.labels = plt.lon.axes,
+  lat.ax.labs.pos = NULL,
+  ax.labs.size = 4,
+  data.layer = NULL
+)
 }
 \arguments{
 \item{pole}{character; which pole: "N" or "S"?}

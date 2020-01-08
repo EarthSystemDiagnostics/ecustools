@@ -11,6 +11,13 @@
 #' @examples
 GetNetCDFAtCoords <- function(filename, req.coords, req.var, time.var = "time"){
 
+  if (!requireNamespace("ncdf4", quietly = TRUE)) {
+    stop("package 'ncdf4' is needed for this function to work. Please install it. 
+         Linux users may have to install the 3rd party libraries libnetcdf-dev 
+         and libnetcdff-dev before installing ncdf4",
+         call. = FALSE)
+  }
+  
   nc1 <- ncdf4::nc_open(filename, readunlim = FALSE)
   print(nc1)
 
