@@ -1,21 +1,43 @@
-#' @title Nicely formatted polar ggplot
-#' @description Produce a nicely formatted maps of the Arctic or Antarctic in
-#' polar projection. Also works for longitudinal segements, e.g. just Greenland.
-#' Adapted from Mikey Harper's plot https://stackoverflow.com/a/49084793
-#' @param pole which pole N or S?
-#' @param max.lat maximum latitude
-#' @param min.lat minimum latitude
-#' @param max.lon maximum longitude
-#' @param min.lon minimum longitude
-#' @param longitude.spacing interval between longitude axis tick marks
-#' @param land.fill.colour colour to shade the land
-#' @param n.lat.labels approximate number of latitude tickmarks
+#' Nicely formatted polar ggplot
+#'
+#' Produce nicely formatted maps of the Arctic or Antarctic in polar
+#' projection. Also works for longitudinal segments, e.g. just Greenland.
+#'
+#' @param pole character; which pole: "N" or "S"?
+#' @param max.lat maximum latitude.
+#' @param min.lat minimum latitude.
+#' @param max.lon maximum longitude.
+#' @param min.lon minimum longitude.
+#' @param longitude.spacing interval between longitude axis tick marks.
+#' @param land.fill.colour colour to shade the land.
+#' @param country.outline.colour colour for political boundaries (default
+#'   "Black"); set to the same as \code{land.fill.colour} to hide them.
+#' @param n.lat.labels approximate number of latitude tickmarks.
 #' @param nearest.x.degrees round latitude tickmarks to how many degrees?
-#' @param rotate if plotting a segement of < 360 degrees longitude, rotate plot
-#' so that north is up (or south is down)
+#' @param rotate logical; if plotting a segment of < 360 degrees longitude,
+#'   rotate the plot so that north is up (or south is down) as seen from the
+#'   mean longitude of the segment.
+#' @param size.outer size of the outer longitude circle and, if plotting a
+#'   segment, of the outer latitude lines.
+#' @param plt.lat.axes logical; shall latitude axes be plotted?
+#' @param plt.lat.labels logical; shall latitude labels be plotted? Per default
+#'   set to the value of \code{plt.lat.axes}.
+#' @param plt.lon.axes logical; shall longitude axes be plotted?
+#' @param plt.lon.labels logical; shall longitude labels be plotted? Per default
+#'   set to the value of \code{plt.lon.axes}.
+#' @param lat.ax.labs.pos longitudinal positions of the latitude axis
+#'   labels. Per default, the labels are placed at 0 E (180 W) for north (south)
+#'   polar plots or at the mean longitude of a segment; use this parameter to
+#'   override the default setting.
+#' @param ax.labs.size size of latitude and longitude axis labels.
+#' @param data.layer optional ggplot2 layer of data onto which the polar map
+#'   shall be plotted. Defaults to \code{NULL} which only plots the map.
 #' @import ggplot2 maptools rgeos
 #' @importFrom raster crop extent
-#' @author Andrew Dolman <andrew.dolman@awi.de>
+#' @author Andrew Dolman <andrew.dolman@awi.de> with some modifications by
+#'   Thomas Münch.
+#' @source Adapted from Mikey Harper's plot; see
+#'   https://stackoverflow.com/a/49084793.
 #' @export
 #' @examples
 #' ggpolar(pole = "N", max.lat = 90, min.lat = 55, n.lat.labels = 4)
@@ -55,11 +77,19 @@
 #' }
 ggpolar <- function(pole = c("N", "S"),
                     max.lat, min.lat,
-                    min.lon = -180, max.lon = 180,
+                    max.lon = 180, min.lon = -180,
                     longitude.spacing = 60,
                     land.fill.colour = "Grey",
                     country.outline.colour = "Black",
-                    n.lat.labels = 4, nearest.x.degrees = 5, rotate = FALSE) {
+                    n.lat.labels = 4, nearest.x.degrees = 5, rotate = FALSE,
+                    size.outer = 1,
+                    plt.lat.axes = TRUE, plt.lat.labels = plt.lat.axes,
+                    plt.lon.axes = TRUE, plt.lon.labels = plt.lon.axes,
+                    lat.ax.labs.pos = NULL, ax.labs.size = 4,
+                    data.layer = NULL) {
+
+  # force to repair invalid geometries
+  rgeos::set_RGEOS_CheckValidity(2L)
 
   pole <- match.arg(pole, choices = c("N", "S"))
 
@@ -74,19 +104,22 @@ ggpolar <- function(pole = c("N", "S"),
   mean.lon <- mean(c(min.lon, max.lon))
 
   # if not a segment
-  if ((min.lon == -180 & max.lon == 180)){
-    mean.lon <- 180
+  if (!is.segment) {
+    mean.lon <- ifelse(pole == "N", 0, 180)
   }
 
-  if (rotate) {rotate.to <- mean.lon} else {rotate.to <- 0}
+  rotate.to <- 0
+  if (rotate & is.segment) {rotate.to <- mean.lon}
 
   lat.range <- abs(max.lat - min.lat)
-  d.lat.ax.vals <- nearest.x.degrees * round((max.lat - min.lat)/n.lat.labels/nearest.x.degrees)
+  d.lat.ax.vals <- nearest.x.degrees *
+    round((max.lat - min.lat)/n.lat.labels/nearest.x.degrees)
 
-  # Hemishphere specific values
+  # Hemisphere specific values
   if (pole == "N") {
-    lat.ax.vals <- seq(min.lat + d.lat.ax.vals, max.lat,
-                       by = d.lat.ax.vals)
+
+    lat.ax.vals <- seq(min.lat + d.lat.ax.vals, max.lat, by = d.lat.ax.vals)
+
     outer.lat.ax.val <- min.lat
     long.lab.pos.1 <- outer.lat.ax.val - (lat.range / 20)
     long.lab.pos.2 <- outer.lat.ax.val - (lat.range / 7)
@@ -95,8 +128,9 @@ ggpolar <- function(pole = c("N", "S"),
     long.line.end <- long.lab.pos.1
 
   } else if (pole == "S") {
-    lat.ax.vals <- seq(max.lat - d.lat.ax.vals, min.lat,
-                       by = -d.lat.ax.vals)
+
+    lat.ax.vals <- seq(max.lat - d.lat.ax.vals, min.lat, by = -d.lat.ax.vals)
+
     outer.lat.ax.val <- max.lat
     long.lab.pos.1 <- outer.lat.ax.val + (lat.range / 20)
     long.lab.pos.2 <- outer.lat.ax.val + (lat.range / 7)
@@ -106,39 +140,65 @@ ggpolar <- function(pole = c("N", "S"),
   }
 
   lat.ax.vals <- lat.ax.vals[abs(lat.ax.vals) != 90]
-  lat.ax.labs <- paste0(lat.ax.vals, "°", ifelse(lat.ax.vals <
-                                                   0, " S", " N"))
+  lat.ax.labs <- paste0(ifelse(lat.ax.vals < 0, -lat.ax.vals, lat.ax.vals),
+                        "°", ifelse(lat.ax.vals < 0, " S", " N"))
 
-  # Defines the x axes required
+  # Define the x axes required
   long.ax.vals <- seq(min.lon, max.lon, by = longitude.spacing)
 
-  if (is.segment == FALSE){
+  if (!is.segment) {
     long.ax.vals <- long.ax.vals[long.ax.vals != -180]
   }
 
-  long.ax.labs <- paste0(abs(long.ax.vals), "°", ifelse(long.ax.vals <=
-                                                          0, " W", " E"))
+  long.ax.labs <- paste0(abs(long.ax.vals), "°",
+                         ifelse(long.ax.vals <= 0, " W", " E"))
   long.ax.labs[long.ax.vals == 0] <- "0°"
   long.ax.labs[long.ax.vals == 180] <- "180° W"
 
-  lat.lines <- expand.grid(long = min.lon:max.lon, lat = lat.ax.vals)
+  lat.lines <- expand.grid(long = min.lon : max.lon, lat = lat.ax.vals)
+
+  # Define rotation angle for longitude labels
+  if (pole == "N") {
+
+    long.ax.lab.rotation <- long.ax.vals - 180 - rotate.to
+    if (is.segment) long.ax.lab.rotation <- long.ax.lab.rotation + 180
+
+  } else {
+
+    long.ax.lab.rotation <- -long.ax.vals + rotate.to
+  }
 
   # Get map outline and crop
-  data("wrld_simpl", package = "maptools")
-  map.outline <- raster::crop(wrld_simpl,
-                              raster::extent(min.lon, max.lon, min.lat, max.lat),
-                              snap = "in")
+  if (is.segment | pole == "N") {
 
-  p <- ggplot() +
+    data("wrld_simpl", package = "maptools")
+    map.outline <- raster::crop(wrld_simpl,
+                                raster::extent(min.lon, max.lon,
+                                               min.lat, max.lat),
+                                snap = "in")
+  } else {
+
+    # Use different map source for south polar full longitude plot
+    # to circumvent buggy line at 180 deg W
+    map.outline <- map_data("world", "Antarctica")
+    i <- which(map.outline$lat >= min.lat & map.outline$lat <= max.lat)
+    map.outline <- map.outline[i, ]
+  }
+
+  if (!length(data.layer)) {
+    p <- ggplot()
+  } else {
+    p <- data.layer
+  }
+
+  p <- p +
 
     # Plot map outline and project to polar coordinates
     geom_polygon(data = map.outline, aes(x = long, y = lat, group = group),
                  fill = land.fill.colour, colour = country.outline.colour) +
 
-    coord_map("ortho", orientation = c(ifelse(pole == "N", 90, -90),
-                                       rotate.to,
-                                       0),
-              #ylim = sort(c(max.lat*0.8, min.lat*0.8)),
+    coord_map("ortho",
+              orientation = c(ifelse(pole == "N", 90, -90), rotate.to, 0),
               xlim = c(min.lon, max.lon)
               ) +
 
@@ -146,63 +206,57 @@ ggpolar <- function(pole = c("N", "S"),
     scale_x_continuous("", breaks = NULL) +
     scale_y_continuous("", breaks = NULL) +
 
-    # Add axes and labels
-
-
-    # Longitude axis lines and labels
-    geom_segment(aes(y = long.line.strt, yend = long.line.end,
-                     x = long.ax.vals, xend = long.ax.vals), linetype = "dashed",
-                 colour = "black", size = 0.25) +
-    geom_text(aes(x = long.ax.vals, y = long.lab.pos.2, label = long.ax.labs)) +
-
-    # Outer longitude axis
-    geom_line(aes(y = outer.lat.ax.val, x = min.lon:max.lon), size = 1,
-              colour = "black") +
-
-    # Lat axis lines
-    geom_line(data = lat.lines, aes(y = lat, x = long, group = lat),
-              size = 0.25, linetype = "dashed", colour = "black") +
-    # Lat axis labels
-    geom_label(aes(x = mean.lon, y = lat.ax.vals, label = lat.ax.labs),
-               #hjust = -0.2,
-               alpha = 0.75, label.size = 0) +
+    # Outer latitude axis
+    geom_line(aes(y = outer.lat.ax.val, x = min.lon : max.lon),
+              size = size.outer, colour = "black") +
 
     # Change theme to remove panel backgound
     theme(panel.background = element_blank())
 
+  # Add axes and labels
+
+  # Lat axis lines
+  if (plt.lat.axes) {
+    p <- p + geom_line(data = lat.lines, aes(y = lat, x = long, group = lat),
+                       size = 0.25, linetype = "dashed", colour = "black")
+  }
+  # Lat axis labels
+  if (plt.lat.labels) {
+
+    if (!length(lat.ax.labs.pos)) {
+      lat.ax.labs.pos <- mean.lon
+    }
+
+    p <- p + geom_label(aes(x = lat.ax.labs.pos,
+                            y = lat.ax.vals,
+                            label = lat.ax.labs),
+                        size = ax.labs.size,
+                        alpha = 0.75, label.size = 0)
+  }
+
+  # Longitude axis lines
+  if (plt.lon.axes) {
+
+    p <- p + geom_segment(aes(y = long.line.strt, yend = long.line.end,
+                              x = long.ax.vals, xend = long.ax.vals),
+                          linetype = "dashed", colour = "black", size = 0.25)
+  }
+  # Longitude axis labels
+  if (plt.lon.labels) {
+
+    p <- p + geom_text(aes(x = long.ax.vals,
+                           y = long.lab.pos.2,
+                           label = long.ax.labs,
+                           angle = long.ax.lab.rotation),
+                       size = ax.labs.size)
+  }
+
   # If segment add lines to edge
-  if (is.segment){
+  if (is.segment) {
     p <- p + geom_segment(aes(y = long.line.strt, yend = long.line.end,
                               x = c(min.lon, max.lon), xend = c(min.lon, max.lon)),
-                          colour = "black", size = 1)
+                          colour = "black", size = size.outer)
   }
 
   p
 }
-
-
-
-
-# # ## DUMMY Data
-# library(ggplot2)
-# lat <- seq(87.5, -87.5, -2.5)
-# lon <- seq(2.5, 360, 2.5)
-# dat <- matrix(rnorm(length(lat) * length(lon)),
-#               ncol = length(lat), nrow = length(lon))
-#
-# colnames(dat) <- lat
-# rownames(dat) <- lon
-#
-# dat.vec <- reshape2::melt(dat)
-# colnames(dat.vec)[1:2] <- c('lon','lat')
-#
-# dat.vec.sub <- subset(dat.vec, lat >= 55)
-# #dat.vec.sub <- dat.vec.sub[sample(nrow(dat.vec.sub), 100) ,]
-#
-# p + geom_tile(data = dat.vec.sub, aes(x = lon, y = lat, z = value, fill = value), alpha = 0.5)
-
-
-
-
-
-

@@ -3,38 +3,71 @@
 \name{ggpolar}
 \alias{ggpolar}
 \title{Nicely formatted polar ggplot}
+\source{
+Adapted from Mikey Harper's plot; see
+  https://stackoverflow.com/a/49084793.
+}
 \usage{
-ggpolar(pole = c("N", "S"), max.lat, min.lat, min.lon = -180,
-  max.lon = 180, longitude.spacing = 60, land.fill.colour = "Grey",
+ggpolar(pole = c("N", "S"), max.lat, min.lat, max.lon = 180,
+  min.lon = -180, longitude.spacing = 60, land.fill.colour = "Grey",
   country.outline.colour = "Black", n.lat.labels = 4,
-  nearest.x.degrees = 5, rotate = FALSE)
+  nearest.x.degrees = 5, rotate = FALSE, size.outer = 1,
+  plt.lat.axes = TRUE, plt.lat.labels = plt.lat.axes,
+  plt.lon.axes = TRUE, plt.lon.labels = plt.lon.axes,
+  lat.ax.labs.pos = NULL, ax.labs.size = 4, data.layer = NULL)
 }
 \arguments{
-\item{pole}{which pole N or S?}
+\item{pole}{character; which pole: "N" or "S"?}
 
-\item{max.lat}{maximum latitude}
+\item{max.lat}{maximum latitude.}
 
-\item{min.lat}{minimum latitude}
+\item{min.lat}{minimum latitude.}
 
-\item{min.lon}{minimum longitude}
+\item{max.lon}{maximum longitude.}
 
-\item{max.lon}{maximum longitude}
+\item{min.lon}{minimum longitude.}
 
-\item{longitude.spacing}{interval between longitude axis tick marks}
+\item{longitude.spacing}{interval between longitude axis tick marks.}
 
-\item{land.fill.colour}{colour to shade the land}
+\item{land.fill.colour}{colour to shade the land.}
 
-\item{n.lat.labels}{approximate number of latitude tickmarks}
+\item{country.outline.colour}{colour for political boundaries (default
+"Black"); set to the same as \code{land.fill.colour} to hide them.}
+
+\item{n.lat.labels}{approximate number of latitude tickmarks.}
 
 \item{nearest.x.degrees}{round latitude tickmarks to how many degrees?}
 
-\item{rotate}{if plotting a segement of < 360 degrees longitude, rotate plot
-so that north is up (or south is down)}
+\item{rotate}{logical; if plotting a segment of < 360 degrees longitude,
+rotate the plot so that north is up (or south is down) as seen from the
+mean longitude of the segment.}
+
+\item{size.outer}{size of the outer longitude circle and, if plotting a
+segment, of the outer latitude lines.}
+
+\item{plt.lat.axes}{logical; shall latitude axes be plotted?}
+
+\item{plt.lat.labels}{logical; shall latitude labels be plotted? Per default
+set to the value of \code{plt.lat.axes}.}
+
+\item{plt.lon.axes}{logical; shall longitude axes be plotted?}
+
+\item{plt.lon.labels}{logical; shall longitude labels be plotted? Per default
+set to the value of \code{plt.lon.axes}.}
+
+\item{lat.ax.labs.pos}{longitudinal positions of the latitude axis
+labels. Per default, the labels are placed at 0 E (180 W) for north (south)
+polar plots or at the mean longitude of a segment; use this parameter to
+override the default setting.}
+
+\item{ax.labs.size}{size of latitude and longitude axis labels.}
+
+\item{data.layer}{optional ggplot2 layer of data onto which the polar map
+shall be plotted. Defaults to \code{NULL} which only plots the map.}
 }
 \description{
-Produce a nicely formatted maps of the Arctic or Antarctic in
-polar projection. Also works for longitudinal segements, e.g. just Greenland.
-Adapted from Mikey Harper's plot https://stackoverflow.com/a/49084793
+Produce nicely formatted maps of the Arctic or Antarctic in polar
+projection. Also works for longitudinal segments, e.g. just Greenland.
 }
 \examples{
 ggpolar(pole = "N", max.lat = 90, min.lat = 55, n.lat.labels = 4)
@@ -74,5 +107,6 @@ ggpolar(pole = "S", max.lat = -90, min.lat = -55)
 }
 }
 \author{
-Andrew Dolman <andrew.dolman@awi.de>
+Andrew Dolman <andrew.dolman@awi.de> with some modifications by
+  Thomas Münch.
 }
