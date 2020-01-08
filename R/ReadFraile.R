@@ -5,12 +5,13 @@
 #' @param FILENAME character, path to netcdf file
 #' @param varname character, the variable to be read
 #'
-#' @return a \code{\link{pField}} object
+#' @return a \code{\link[pfields]{pField}} object
 #' @export read_fraile ReadFraile
 #' @aliases read_fraile ReadFraile
 #' @source copied from paleolibrary/src/single_functions/speclib/read.fraile.R
 #' and updated to use \code{ncdf4}
 #' @author Thomas Laepple
+#' @seealso \url{https://github.com/EarthSystemDiagnostics/pfields}
 #' @examples
 ReadFraile <- function(FILENAME, varname){
 

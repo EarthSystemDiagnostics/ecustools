@@ -17,11 +17,14 @@ ReadFraile(FILENAME, varname)
 \item{varname}{character, the variable to be read}
 }
 \value{
-a \code{\link{pField}} object
+a \code{\link[pfields]{pField}} object
 }
 \description{
 Reads the biogeochemical dataset from Igaraza Faile, Monthly data varname
 e.g. bulloides or ruber... to get the list, leave it empty
+}
+\seealso{
+\url{https://github.com/EarthSystemDiagnostics/pfields}
 }
 \author{
 Thomas Laepple

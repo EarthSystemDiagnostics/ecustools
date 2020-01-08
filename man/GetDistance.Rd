@@ -24,7 +24,8 @@ same length as \code{lat}.}
 shall be used _as is_ as the target location (\code{FALSE}), or instead the
 nearest point of the positions specified by 'lat' and 'lon' (\code{TRUE}).
 Selection of the nearest point is currently implemented with
-\code{\link{MinimizeSpherical}}.}
+\code{\link[pfields]{MinimizeSpherical}}, for which the \code{"pfields"}
+package needs to be installed.}
 
 \item{verbose}{logical; if \code{TRUE} an informative message regarding the
 selected target location is printed.}
@@ -64,7 +65,9 @@ d <- GetDistance(lat0, lon0, lat, lon, get.nearest = TRUE, verbose = TRUE)
 range(d)
 }
 \seealso{
-\code{\link[pfields]{GetDistanceField}}
+\code{\link[pfields]{MinimizeSpherical}};
+\code{\link[pfields]{GetDistanceField}};
+\url{https://github.com/EarthSystemDiagnostics/pfields}
 }
 \author{
 Thomas Münch
