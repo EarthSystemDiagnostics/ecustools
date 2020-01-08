@@ -27,13 +27,16 @@
 #' shall be used _as is_ as the target location (\code{FALSE}), or instead the
 #' nearest point of the positions specified by 'lat' and 'lon' (\code{TRUE}).
 #' Selection of the nearest point is currently implemented with
-#' \code{\link{MinimizeSpherical}}.
+#' \code{\link[pfields]{MinimizeSpherical}}, for which the \code{"pfields"}
+#' package needs to be installed.
 #' @param verbose logical; if \code{TRUE} an informative message regarding the
 #' selected target location is printed.
 #' @return Numeric vector of the same length as \code{lat} with the distances
 #' in km from the target location.
 #' @author Thomas Münch
-#' @seealso \code{\link[pfields]{GetDistanceField}}
+#' @seealso \code{\link[pfields]{MinimizeSpherical}};
+#' \code{\link[pfields]{GetDistanceField}};
+#' \url{https://github.com/EarthSystemDiagnostics/pfields}
 #' @examples
 #' # some coordinates
 #' lat0 <- -75
@@ -62,9 +65,14 @@ GetDistance <- function(lat0, lon0, lat, lon,
 
   if (get.nearest) {
 
+    if (!requireNamespace("pfields", quietly = TRUE)) {
+      stop(paste("Please install package 'pfields' to use this functionality."),
+           call. = FALSE)
+    }
+
     # get lat, lon of nearest point relative to target
-    point <- rev(MinimizeSpherical(lat0, lon0, lat, lon,
-                                   return.coordinates = TRUE))
+    point <- rev(pfields::MinimizeSpherical(lat0, lon0, lat, lon,
+                                            return.coordinates = TRUE))
     
     if (verbose) {
       message(sprintf(
