@@ -17,6 +17,9 @@ The equation from Duplessy et al. (1991) based on the
   salinity for water samples collected in the upper 250 m of the Atlantic
   Ocean during the GEOSECS expedition. As reported in Anand et al. 2003
 }
+\examples{
+d18OwFromSalinity(30)
+}
 \references{
 Anand, P., Elderfield, H. and Conte, M. H.: Calibration of Mg/Ca thermometry
 in planktonic foraminifera from a sediment trap time series,

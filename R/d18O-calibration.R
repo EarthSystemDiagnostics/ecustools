@@ -22,6 +22,7 @@
 #' @export
 #'
 #' @examples
+#' d18OwFromSalinity(30)
 d18OwFromSalinity <- function(Salinity){
   -19.264 + 0.558 * Salinity
 }
@@ -53,11 +54,11 @@ d18OwFromSalinity <- function(Salinity){
 #' @export
 #'
 #' @examples
+#'d18OcFromd18OwTemp(d18Ow = 0.6, 1:26)
 d18OcFromd18OwTemp <- function(d18Ow, Temp){
   (d18Ow - 0.27) + (4.38 - (4.38^2 - 4 * 0.1 * (16.9 - Temp))^0.5) / (2 * 0.1)
 }
 
-#CalcifTemp(d18OcFromd18OwTemp(d18Ow = 0.6, 1:26), 0.6)
 
 
 #' Calcification temperature from calcite d18O and d18Ow (inverse of the Paleotemperature Equation)
@@ -69,6 +70,7 @@ d18OcFromd18OwTemp <- function(d18Ow, Temp){
 #' @export
 #'
 #' @examples
+#' CalcifTemp(d18OcFromd18OwTemp(d18Ow = 0.6, 1:26), 0.6)
 CalcifTemp <- function(d18Oc, d18Ow){
   16.9 - 4.38 * (d18Oc - (d18Ow - 0.27)) + 0.1 *
     (d18Oc - (d18Ow - 0.27))^2

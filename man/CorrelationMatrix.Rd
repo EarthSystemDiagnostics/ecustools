@@ -4,8 +4,12 @@
 \alias{PlotPairwiseCorrelations}
 \title{Calculate and plot a pairwise correlations}
 \usage{
-PlotPairwiseCorrelations(M, axis.label = NULL,
-  return.corr.tibble = FALSE, plotit = TRUE)
+PlotPairwiseCorrelations(
+  M,
+  axis.label = NULL,
+  return.corr.tibble = FALSE,
+  plotit = TRUE
+)
 }
 \arguments{
 \item{M}{A matrix or dataframe for which the pairwise corrlelations between

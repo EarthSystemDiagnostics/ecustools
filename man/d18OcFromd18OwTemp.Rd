@@ -21,6 +21,9 @@ The paleotemperature equation of O’Neil et al. (1969) and
 
   As described in Anand et al. 2003
 }
+\examples{
+d18OcFromd18OwTemp(d18Ow = 0.6, 1:26)
+}
 \references{
 O’Neil, J. R., R. N. Clayton, and T. K. Mayeda, Oxygen isotope fractionation
 in divalent metal carbonates, 51, 5547– 5558, 1969.

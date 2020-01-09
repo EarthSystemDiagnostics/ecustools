@@ -13,10 +13,16 @@
 #' @author Thomas Laepple
 #' @seealso \url{https://github.com/EarthSystemDiagnostics/pfields}
 #' @examples
+#' \dontrun{
+#' ReadFrail("path/to/file.nc",
+#'                   varname = "var.name")
+#' }
 ReadFraile <- function(FILENAME, varname){
 
   if (!requireNamespace("ncdf4", quietly = TRUE)) {
-    stop("package 'ncdf4' is needed for this function to work. Please install it.",
+    stop("package 'ncdf4' is needed for this function to work. Please install it.
+         Linux users may have to install the 3rd party libraries libnetcdf-dev
+         and libnetcdff-dev before installing ncdf4",
          call. = FALSE)
   }
   if (!requireNamespace("pfields", quietly = TRUE)) {
@@ -41,7 +47,7 @@ ReadFraile <- function(FILENAME, varname){
   temp.lon <- temp.lon[tmp$ix]
   temp.data <- temp.data[tmp$ix, , ]
 
-  nc_close(temp.nc)
+  ncdf4::nc_close(temp.nc)
 
   return(pfields::pField(temp.data, temp.time, lat = temp.lat, lon = temp.lon,
                          name = varname, history = FILENAME))

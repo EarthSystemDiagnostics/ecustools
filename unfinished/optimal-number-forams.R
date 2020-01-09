@@ -15,8 +15,8 @@ CostSigma <- function(sigma.ind, sigma.meas,
 }
 
 
-CostSigma(sigma.ind = 2, sigma.meas = 0.5,
-          n.ind = 2, n.meas = 2,
+CostSigma(sigma.ind = 0.25, sigma.meas = 0.12,
+          n.ind = 25, n.meas = 4,
           cost.ind = 1, cost.meas = 10)
 
 
@@ -89,13 +89,13 @@ GetSetupSigma <- function(cost,
 
 
 df <- GetSetupSigma(cost = 100,
-              sigma.ind = 2, sigma.meas = 0.5,
+              sigma.ind = 0.22, sigma.meas = 0.12,
               cost.meas = 11, cost.ind = 0.5,
               return = "all")
 
 GetSetupSigma(cost = 100,
-              sigma.ind = 2, sigma.meas = 0.5,
-              cost.meas = 11, cost.ind = 0.5,
+              sigma.ind = 0.25, sigma.meas = 0.12,
+              cost.meas = 11, cost.ind = 1,
               return = "best")
 
 GetSetupSigma(cost = 10,

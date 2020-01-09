@@ -1,6 +1,6 @@
 #' Extract timeseries for nearest coordinates from a netcdf file
 #'
-#' @param filename
+#' @param filename Name of the netcdf file
 #' @param req.coords matrix or dataframe of longitude and latitude coordinates
 #' @param req.var name of the variable to extract
 #' @param time.var name of the time variable
@@ -9,7 +9,21 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{req.coors = data.frame(
+#'   lon = c(-64.5417, -64.9888, -64.7),
+#'   lat = c(30.0867, 30.6486, 32.47))
+#' GetNetCDFAtCoords("path/to/file.nc",
+#'                   req.coords = req.coords,
+#'                   req.var = "nobs")
+#' }
 GetNetCDFAtCoords <- function(filename, req.coords, req.var, time.var = "time"){
+
+  if (!requireNamespace("ncdf4", quietly = TRUE)) {
+    stop("package 'ncdf4' is needed for this function to work. Please install it.
+         Linux users may have to install the 3rd party libraries libnetcdf-dev
+         and libnetcdff-dev before installing ncdf4",
+         call. = FALSE)
+  }
 
   nc1 <- ncdf4::nc_open(filename, readunlim = FALSE)
   print(nc1)

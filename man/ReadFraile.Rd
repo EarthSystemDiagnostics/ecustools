@@ -23,6 +23,12 @@ a \code{\link[pfields]{pField}} object
 Reads the biogeochemical dataset from Igaraza Faile, Monthly data varname
 e.g. bulloides or ruber... to get the list, leave it empty
 }
+\examples{
+\dontrun{
+ReadFrail("path/to/file.nc",
+                  varname = "var.name")
+}
+}
 \seealso{
 \url{https://github.com/EarthSystemDiagnostics/pfields}
 }

@@ -17,14 +17,14 @@ Suggests:
     ncdf4,
     knitr,
     rmarkdown,
-    pfields
+    pfields,
+    PaleoSpec
 VignetteBuilder: knitr
 Imports: 
     tibble,
     dplyr,
     tidyr,
     ggplot2,
-    ncdf4,
     raster,
     maptools,
     orbitalforcing (>= 0.1),
@@ -34,7 +34,8 @@ Imports:
     ggforce,
     rgeos,
     mapproj,
-    geosphere
+    geosphere,
+    Bchron
 Remotes: 
     earthsystemdiagnostics/orbitalforcing,
     earthsystemdiagnostics/pfields
