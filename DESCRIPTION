@@ -2,8 +2,11 @@ Package: ecustools
 Title: A miscellaneous collection of R functions for working with time-series
     and paleo data.
 Version: 0.1
-Authors@R: c(person("Thomas", "Laepple", email = "tlaepple@awi.de", role = c("aut")), 
-    person("Andrew", "Dolman", email = "andrew.dolman@awi.de", role = c("aut", "cre")))
+Author:
+  Andrew Dolman [aut, cre],
+  Thomas Laepple [aut],
+  Thomas Muench [aut]
+Maintainer: Andrew Dolman <andrew.dolman@awi.de>
 Description: A miscellaneous collection of R functions for working with time-series
     and paleo data. Many of these functions have been ported from the
     "paleoLibrary" collection of R scripts.
