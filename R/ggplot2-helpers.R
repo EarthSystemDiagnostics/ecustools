@@ -18,8 +18,6 @@ reverselog_trans <- function(base = exp(1)) {
                     domain = c(1e-100, Inf))
 }
 
-
-
 #' Plot all ggforce::facet_wrap_paginate pages
 #'
 #' @description A helper function to return all pages from
@@ -36,9 +34,17 @@ reverselog_trans <- function(base = exp(1)) {
 #' @export
 #'
 #' @examples
-#' gg <- facet_wrap_paginate_auto(uk37.plots.2,
-#'         facets = formula(~Location + Proxy + ID.no),
-#'         nrow = 4, ncol = 3)
+#' library(ggplot2)
+#' dat <- expand.grid(x = 1:100, a = letters[1:11])
+#' dat$y <- dat$x + rnorm(nrow(dat), 0, 10)
+#' p <- ggplot(dat, aes(x = x, y = y)) +
+#'   geom_point() +
+#'   facet_wrap(~a)
+#' p
+#'
+#' gg <- facet_wrap_paginate_auto(p,
+#'                                facets = formula(~a),
+#'                                nrow = 2, ncol = 2)
 #' gg
 facet_wrap_paginate_auto <- function(ggplot.obj, facets, nrow, ncol) {
   built.plot <- ggplot_build(ggplot.obj)

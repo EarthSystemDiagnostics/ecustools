@@ -84,6 +84,7 @@ Produce nicely formatted maps of the Arctic or Antarctic in polar
 projection. Also works for longitudinal segments, e.g. just Greenland.
 }
 \examples{
+library(ggplot2)
 ggpolar(pole = "N", max.lat = 90, min.lat = 55, n.lat.labels = 4)
 ggpolar(pole = "S", max.lat = -60, min.lat = -90)
 

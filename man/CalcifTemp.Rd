@@ -17,3 +17,6 @@ Temperature in celcius
 \description{
 Calcification temperature from calcite d18O and d18Ow (inverse of the Paleotemperature Equation)
 }
+\examples{
+CalcifTemp(d18OcFromd18OwTemp(d18Ow = 0.6, 1:26), 0.6)
+}
