@@ -16,7 +16,6 @@ Simulate past climate based on the insolation, as described in Laepple, Thomas, 
 library(PaleoSpec)
 library(ecustools)
 library(pfields)
-library(orbitalforcing) # functions from orbitalforcing are re-exported by ecustools
 ```
 
 Set latitude and longitude of the simulated record
