@@ -144,9 +144,10 @@ circ_longlat <- circle %>% st_transform(crs = 4326)
 ggplot() +
   geom_sf(data = circle,
           fill = NA) +
-  geom_sf(data = visible.lat.lines, colour = "White") +
-  geom_sf(data = visible.lon.lines, colour = "White") +
+  geom_sf(data = visible.lat.lines, colour = "Grey") +
+  geom_sf(data = visible.lon.lines, colour = "Grey") +
   geom_sf(data=st_collection_extract(visible))+#, fill = "Darkgrey", colour = NA) +
   coord_sf(crs = ortho) +
-  theme(panel.grid.major = element_blank()) +
+  theme(panel.grid.major = element_blank(), panel.background = element_blank()) +
   geom_sf(data = circ_longlat, fill = NA)
+
