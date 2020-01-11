@@ -135,19 +135,67 @@ lon.lines <- expand.grid(x = seq(-179.9, 180, 30), y = seq(-90, 90, 1)) %>%
 visible.lon.lines <- st_intersection(st_make_valid(lon.lines), st_buffer(circle_longlat, -0.09)) %>%
   st_transform(crs = ortho)
 
-circ <- st_point(x = c(0,0)) %>% st_buffer(dist = 6371000) %>% st_sfc(crs = ortho)
 
 # Project this polygon in lat-lon
 circ_longlat <- circle %>% st_transform(crs = 4326)
 
+
+lat.ax.vals <- seq(-90, 90, 15)
+lat.ax.labs <- paste0(ifelse(lat.ax.vals < 0, -lat.ax.vals, lat.ax.vals),
+                      "°", ifelse(lat.ax.vals < 0, " S", " N"))
+lat.ax.labs.pos <- -30
+
+lat.ax <- expand.grid(x = lat.ax.labs.pos, y = lat.ax.vals) %>% 
+  sf::st_as_sf(., coords = c("x","y")) %>%
+  sf::st_set_crs(4326)
+
+long.ax.vals <- seq(-180, 180, 30)
+
+# circle_longlat.labs <- st_point(x = c(0,0)) %>% 
+#   st_buffer(dist = 6372000) %>% 
+#   st_sfc(crs = ortho) %>% 
+#   st_transform(crs = 4326)
+
+visible.lon.lines.deg <- st_intersection(st_make_valid(lon.lines), st_buffer(circle_longlat, -0.09))
+
+long.ax.coords <- t(sapply(1:(length(long.ax.vals)-1), function(i) attributes(visible.lon.lines.deg$geometry[i])$bbox[c("xmin", "ymin")]))
+colnames(long.ax.coords) <- c("x", "y")
+
+
+FormatLongLabs <- function(long){
+  
+  long <- round(long)
+  
+  long.ax.labs <- paste0(abs(long), "°",
+                         ifelse(long <= 0, " W", " E"))
+  
+  long.ax.labs[long == 0] <- "0°"
+  long.ax.labs[long == 180] <- "180° W"
+  return(long.ax.labs)
+}
+
+
+long.ax <- long.ax.coords %>% 
+  data.frame(.) %>% 
+  filter(complete.cases(x)) %>% 
+  mutate(labs = FormatLongLabs(x)) %>% 
+  sf::st_as_sf(., coords = c("x","y")) %>%
+  sf::st_set_crs(4326)
+
+
 # Final plot
-ggplot() +
+p <- ggplot() +
   geom_sf(data = circle,
           fill = NA) +
   geom_sf(data = visible.lat.lines, colour = "Grey") +
   geom_sf(data = visible.lon.lines, colour = "Grey") +
   geom_sf(data=st_collection_extract(visible))+#, fill = "Darkgrey", colour = NA) +
   coord_sf(crs = ortho) +
-  theme(panel.grid.major = element_blank(), panel.background = element_blank()) +
+  theme(panel.grid.major = element_blank(), panel.background = element_blank(), 
+        axis.title = element_blank()) +
   geom_sf(data = circ_longlat, fill = NA)
 
+
+p <- p + geom_sf_label(data = lat.ax, aes(label = lat.ax.labs), label.size = 0, alpha = 0.75, label.r = unit(0.5, "lines"))
+p <- p + geom_sf_label(data = long.ax, aes(label = labs), label.size = 0, alpha = 0.75, label.r = unit(0.5, "lines"))
+p
