@@ -38,6 +38,9 @@
 #' @param plt.lon.axes logical; shall longitude axes be plotted?
 #' @param plt.lon.labels logical; shall longitude labels be plotted? Per default
 #'   set to the value of \code{plt.lon.axes}.
+#' @param rotate.long.labels logical; controls whether the longitude axis labels
+#'   are rotated according to their value and the setting of \code{rotate} (the
+#'   default) or not.
 #' @param lat.ax.labs.pos longitudinal positions of the latitude axis
 #'   labels. Per default, the labels are placed at 0 E (180 W) for north (south)
 #'   polar plots or at the mean longitude of a segment; use this parameter to
@@ -101,6 +104,7 @@ ggpolar <- function(pole = c("N", "S"),
                     rotate = FALSE, size.outer = 1,
                     plt.lat.axes = TRUE, plt.lat.labels = plt.lat.axes,
                     plt.lon.axes = TRUE, plt.lon.labels = plt.lon.axes,
+                    rotate.long.labels = TRUE,
                     lat.ax.labs.pos = NULL, ax.labs.size = 4,
                     data.layer = NULL) {
 
@@ -182,14 +186,22 @@ ggpolar <- function(pole = c("N", "S"),
   lat.lines <- expand.grid(long = min.lon : max.lon, lat = lat.ax.vals)
 
   # Define rotation angle for longitude labels
-  if (pole == "N") {
+  if (rotate.long.labels) {
 
-    long.ax.lab.rotation <- long.ax.vals - 180 - rotate.to
-    if (is.segment) long.ax.lab.rotation <- long.ax.lab.rotation + 180
+    if (pole == "N") {
+
+      long.ax.lab.rotation <- long.ax.vals - 180 - rotate.to
+      if (is.segment) long.ax.lab.rotation <- long.ax.lab.rotation + 180
+
+    } else {
+
+      long.ax.lab.rotation <- -long.ax.vals + rotate.to
+    }
 
   } else {
 
-    long.ax.lab.rotation <- -long.ax.vals + rotate.to
+    long.ax.lab.rotation <- 0
+
   }
 
   # Get map outline and crop
