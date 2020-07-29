@@ -14,6 +14,11 @@
 #'   "Black"); set to the same as \code{land.fill.colour} to hide them.
 #' @param n.lat.labels approximate number of latitude tickmarks.
 #' @param nearest.x.degrees round latitude tickmarks to how many degrees?
+#' @param f.long.label.ticks fraction of the plotted latitude axis range by
+#'   which the longitude ticksmarks extend behind the outer latitude axis,
+#'   i.e. the minimum (maximum) latitude for north (south) polar plots.
+#' @param f.long.label.pos fraction of the plotted latitude axis range by
+#'   which the longitude labels are offset from the outer latitude axis.
 #' @param rotate logical; if plotting a segment of < 360 degrees longitude,
 #'   rotate the plot so that north is up (or south is down) as seen from the
 #'   mean longitude of the segment.
@@ -82,8 +87,9 @@ ggpolar <- function(pole = c("N", "S"),
                     longitude.spacing = 60,
                     land.fill.colour = "Grey",
                     country.outline.colour = "Black",
-                    n.lat.labels = 4, nearest.x.degrees = 5, rotate = FALSE,
-                    size.outer = 1,
+                    n.lat.labels = 4, nearest.x.degrees = 5,
+                    f.long.label.ticks = 20, f.long.label.pos = 7,
+                    rotate = FALSE, size.outer = 1,
                     plt.lat.axes = TRUE, plt.lat.labels = plt.lat.axes,
                     plt.lon.axes = TRUE, plt.lon.labels = plt.lon.axes,
                     lat.ax.labs.pos = NULL, ax.labs.size = 4,
@@ -123,8 +129,8 @@ ggpolar <- function(pole = c("N", "S"),
 
     outer.lat.ax.val <- min.lat
     inner.lat.ax.val <- ifelse(max.lat == 90, NA, max.lat)
-    long.lab.pos.1 <- outer.lat.ax.val - (lat.range / 20)
-    long.lab.pos.2 <- outer.lat.ax.val - (lat.range / 7)
+    long.lab.pos.1 <- outer.lat.ax.val - (lat.range / f.long.label.ticks)
+    long.lab.pos.2 <- outer.lat.ax.val - (lat.range / f.long.label.pos)
 
     long.line.strt <- max.lat
     long.line.end <- long.lab.pos.1
@@ -135,8 +141,8 @@ ggpolar <- function(pole = c("N", "S"),
 
     outer.lat.ax.val <- max.lat
     inner.lat.ax.val <- ifelse(min.lat == -90, NA, min.lat)
-    long.lab.pos.1 <- outer.lat.ax.val + (lat.range / 20)
-    long.lab.pos.2 <- outer.lat.ax.val + (lat.range / 7)
+    long.lab.pos.1 <- outer.lat.ax.val + (lat.range / f.long.label.ticks)
+    long.lab.pos.2 <- outer.lat.ax.val + (lat.range / f.long.label.pos)
 
     long.line.strt <- long.lab.pos.1
     long.line.end <- min.lat
