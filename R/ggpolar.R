@@ -17,8 +17,8 @@
 #' @param rotate logical; if plotting a segment of < 360 degrees longitude,
 #'   rotate the plot so that north is up (or south is down) as seen from the
 #'   mean longitude of the segment.
-#' @param size.outer size of the outer longitude circle and, if plotting a
-#'   segment, of the outer latitude lines.
+#' @param size.outer size of the outer (and potential inner) longitude circle
+#'   and, if plotting a segment, of the outer latitude lines.
 #' @param plt.lat.axes logical; shall latitude axes be plotted?
 #' @param plt.lat.labels logical; shall latitude labels be plotted? Per default
 #'   set to the value of \code{plt.lat.axes}.
@@ -122,6 +122,7 @@ ggpolar <- function(pole = c("N", "S"),
     lat.ax.vals <- seq(min.lat + d.lat.ax.vals, max.lat, by = d.lat.ax.vals)
 
     outer.lat.ax.val <- min.lat
+    inner.lat.ax.val <- ifelse(max.lat == 90, NA, max.lat)
     long.lab.pos.1 <- outer.lat.ax.val - (lat.range / 20)
     long.lab.pos.2 <- outer.lat.ax.val - (lat.range / 7)
 
@@ -133,6 +134,7 @@ ggpolar <- function(pole = c("N", "S"),
     lat.ax.vals <- seq(max.lat - d.lat.ax.vals, min.lat, by = -d.lat.ax.vals)
 
     outer.lat.ax.val <- max.lat
+    inner.lat.ax.val <- ifelse(min.lat == -90, NA, min.lat)
     long.lab.pos.1 <- outer.lat.ax.val + (lat.range / 20)
     long.lab.pos.2 <- outer.lat.ax.val + (lat.range / 7)
 
@@ -209,10 +211,16 @@ ggpolar <- function(pole = c("N", "S"),
 
     # Outer latitude axis
     geom_line(aes(y = outer.lat.ax.val, x = min.lon : max.lon),
-              size = size.outer, colour = "black") +
+              size = size.outer, colour = "black")
+
+    # Inner latitude axis
+    if (!is.na(inner.lat.ax.val)) {
+      p <- p + geom_line(aes(y = inner.lat.ax.val, x = min.lon : max.lon),
+                         size = size.outer, colour = "black")
+    }
 
     # Change theme to remove panel backgound
-    theme(panel.background = element_blank())
+    p <- p + theme(panel.background = element_blank())
 
   # Add axes and labels
 
