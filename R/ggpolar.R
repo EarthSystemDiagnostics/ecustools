@@ -19,6 +19,14 @@
 #'   i.e. the minimum (maximum) latitude for north (south) polar plots.
 #' @param f.long.label.pos fraction of the plotted latitude axis range by
 #'   which the longitude labels are offset from the outer latitude axis.
+#' @param lat.ax.vals manually set the latitude axis values where to plot
+#'   latitude labels and lines. This overrides the automatic setting by
+#'   \code{n.lat.labels} and \code{x.nearest.degress}, while the default
+#'   \code{NULL} means to use the automatic setting.
+#' @param long.ax.vals manually set the longitude axis values where to plot
+#'   longitude labels and lines. This overrides the automatic setting by
+#'   \code{longitude.spacing}, while the default \code{NULL} means to use the
+#'   automatic setting.
 #' @param rotate logical; if plotting a segment of < 360 degrees longitude,
 #'   rotate the plot so that north is up (or south is down) as seen from the
 #'   mean longitude of the segment.
@@ -89,6 +97,7 @@ ggpolar <- function(pole = c("N", "S"),
                     country.outline.colour = "Black",
                     n.lat.labels = 4, nearest.x.degrees = 5,
                     f.long.label.ticks = 20, f.long.label.pos = 7,
+                    lat.ax.vals = NULL, long.ax.vals = NULL,
                     rotate = FALSE, size.outer = 1,
                     plt.lat.axes = TRUE, plt.lat.labels = plt.lat.axes,
                     plt.lon.axes = TRUE, plt.lon.labels = plt.lon.axes,
@@ -125,7 +134,9 @@ ggpolar <- function(pole = c("N", "S"),
   # Hemisphere specific values
   if (pole == "N") {
 
-    lat.ax.vals <- seq(min.lat + d.lat.ax.vals, max.lat, by = d.lat.ax.vals)
+    if (!length(lat.ax.vals)) {
+      lat.ax.vals <- seq(min.lat + d.lat.ax.vals, max.lat, by = d.lat.ax.vals)
+    }
 
     outer.lat.ax.val <- min.lat
     inner.lat.ax.val <- ifelse(max.lat == 90, NA, max.lat)
@@ -137,7 +148,9 @@ ggpolar <- function(pole = c("N", "S"),
 
   } else if (pole == "S") {
 
-    lat.ax.vals <- seq(max.lat - d.lat.ax.vals, min.lat, by = -d.lat.ax.vals)
+    if (!length(lat.ax.vals)) {
+      lat.ax.vals <- seq(max.lat - d.lat.ax.vals, min.lat, by = -d.lat.ax.vals)
+    }
 
     outer.lat.ax.val <- max.lat
     inner.lat.ax.val <- ifelse(min.lat == -90, NA, min.lat)
@@ -153,7 +166,9 @@ ggpolar <- function(pole = c("N", "S"),
                         "°", ifelse(lat.ax.vals < 0, " S", " N"))
 
   # Define the x axes required
-  long.ax.vals <- seq(min.lon, max.lon, by = longitude.spacing)
+  if (!length(long.ax.vals)) {
+    long.ax.vals <- seq(min.lon, max.lon, by = longitude.spacing)
+  }
 
   if (!is.segment) {
     long.ax.vals <- long.ax.vals[long.ax.vals != -180]
