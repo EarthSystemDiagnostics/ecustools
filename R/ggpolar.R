@@ -46,6 +46,10 @@
 #'   polar plots or at the mean longitude of a segment; use this parameter to
 #'   override the default setting.
 #' @param ax.labs.size size of latitude and longitude axis labels.
+#' @param clip Should drawing be clipped to the extent of the plot panel? A
+#'   setting of \code{"on"} (the default) means yes, and a setting of
+#'   \code{"off"} means no. For details, please see
+#'   \code{\link[ggplot2]{coord_cartesian}}.
 #' @param data.layer optional ggplot2 layer of data onto which the polar map
 #'   shall be plotted. Defaults to \code{NULL} which only plots the map.
 #' @import ggplot2 maptools rgeos
@@ -105,7 +109,7 @@ ggpolar <- function(pole = c("N", "S"),
                     plt.lat.axes = TRUE, plt.lat.labels = plt.lat.axes,
                     plt.lon.axes = TRUE, plt.lon.labels = plt.lon.axes,
                     rotate.long.labels = TRUE,
-                    lat.ax.labs.pos = NULL, ax.labs.size = 4,
+                    lat.ax.labs.pos = NULL, ax.labs.size = 4, clip = "on",
                     data.layer = NULL) {
 
   # force to repair invalid geometries
@@ -235,7 +239,7 @@ ggpolar <- function(pole = c("N", "S"),
 
     coord_map("ortho",
               orientation = c(ifelse(pole == "N", 90, -90), rotate.to, 0),
-              xlim = c(min.lon, max.lon)
+              xlim = c(min.lon, max.lon), clip = clip
               ) +
 
     # Remove axes and labels
