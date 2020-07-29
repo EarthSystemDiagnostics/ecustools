@@ -4,6 +4,3 @@
 \name{ecustools}
 \alias{ecustools}
 \title{ecustools.}
-\description{
-ecustools.
-}
