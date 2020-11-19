@@ -8,7 +8,7 @@ CalibrateAge(
   df,
   age.14C = "age.14C",
   age.14C.se = "age.14C.se",
-  curve = "intcal13",
+  curve = "intcal20",
   return.type = "df",
   offset = 0
 )
