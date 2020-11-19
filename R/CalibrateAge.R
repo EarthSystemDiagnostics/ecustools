@@ -3,7 +3,7 @@
 #' @param df dataframe
 #' @param age.14C Name of column with 14C ages, Default: 'age.14C'
 #' @param age.14C.se Name of column with 1se 14C age uncertainty, Default: 'age.14C.se'
-#' @param curve Calibration curve, Default: 'intcal13'
+#' @param curve Calibration curve, Default: 'intcal20'
 #' @param return.type Return the ammended dataframe or additionally the list of PDFs, Default: 'df'
 #' @param offset Optional offset applied to all 14C ages, Default: 0
 #' @return A dataframe or list
