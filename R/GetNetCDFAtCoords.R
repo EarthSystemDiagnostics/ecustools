@@ -71,7 +71,7 @@ GetNetCDFAtCoords <- function(filename, req.coords, req.var, time.var = "time",
   
   #dat.out <- tibble::as_tibble(t(dat.out))
   
-  dates <- ncdf4::ncvar_get(nc1, varid = "time", start = c(1), count = c(-1))
+  dates <- ncdf4::ncvar_get(nc1, varid = time.var, start = c(1), count = c(-1))
   
   ncdf4::nc_close(nc1)
   

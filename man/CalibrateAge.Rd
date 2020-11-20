@@ -20,7 +20,7 @@ CalibrateAge(
 
 \item{age.14C.se}{Name of column with 1se 14C age uncertainty, Default: 'age.14C.se'}
 
-\item{curve}{Calibration curve, Default: 'intcal13'}
+\item{curve}{Calibration curve, Default: 'intcal20'}
 
 \item{return.type}{Return the ammended dataframe or additionally the list of PDFs, Default: 'df'}
 
