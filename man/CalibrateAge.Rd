@@ -10,7 +10,7 @@ CalibrateAge(
   age.14C.se = "age.14C.se",
   curve = "intcal20",
   return.type = "df",
-  offset = 0
+  offset = NULL
 )
 }
 \arguments{

@@ -39,16 +39,23 @@
 CalibrateAge <- function(df, age.14C = "age.14C",
                          age.14C.se = "age.14C.se",
                          curve = "intcal20", 
-                         return.type = "df", offset = 0){
+                         return.type = "df", offset = NULL){
 
   return.type <- match.arg(return.type, choices = c("df", "lst"))
   curve <- match.arg(curve, choices = c("intcal13", "shcal13", "marine13",
                                         "intcal20", "marine20", "shcal20",
                                         "normal"))
+  
+  if (is.null(offset)){
+    df$offset <- 0
+  } else{
+    df$offset <- df[[offset]]
+  }
+  
 
   cal.ages <- lapply(1:nrow(df), function(x) {
     tryCatch(Bchron::BchronCalibrate(
-      ages = df[[age.14C]][x] + offset,
+      ages = df[[age.14C]][x] + df[["offset"]][x],
       ageSds = df[[age.14C.se]][x],
       calCurves = curve,
       ids = x),
