@@ -24,21 +24,25 @@ Suggests:
     PaleoSpec
 VignetteBuilder: knitr
 Imports: 
-    tibble,
+    Bchron,
     dplyr,
-    tidyr,
-    ggplot2,
-    raster,
-    maptools,
-    orbitalforcing (>= 0.1),
     geometry,
-    Matrix,
-    scales,
-    ggforce,
-    rgeos,
-    mapproj,
     geosphere,
-    Bchron
+    ggforce,
+    ggplot2,
+    lwgeom,
+    maptools,
+    mapproj,
+    mapview,
+    Matrix,
+    orbitalforcing (>= 0.1),
+    raster, 
+    rgeos,
+    rnaturalearth,
+    scales,
+    sf,
+    tibble,
+    tidyr
 Remotes: 
     earthsystemdiagnostics/orbitalforcing,
     earthsystemdiagnostics/pfields
