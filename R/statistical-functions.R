@@ -1,3 +1,25 @@
+#' Population standard deviation
+#'
+#' @param x 
+#'
+#' @return numeric, population standard deviation
+#' @export
+#'
+#' @examples
+#' 
+#' # analytical solution to SD of uniform
+#' sqrt(1/12 * 10^2)
+#'  
+#' sd(1:10)
+#' 
+#' PopSD(1:10)
+PopSD <- function(x){
+  n <- length(x)
+  adj <- sqrt((n-1) / n)
+  adj * sd(x)
+}
+
+
 #' @title Standard deviation (error) of a standard deviation
 #' @description Calculate the standard deviation (i.e. standard error) of a
 #' standard deviation, given n, the number of samples from which the standard

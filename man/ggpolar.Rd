@@ -19,14 +19,20 @@ ggpolar(
   country.outline.colour = "Black",
   n.lat.labels = 4,
   nearest.x.degrees = 5,
+  f.long.label.ticks = 20,
+  f.long.label.pos = 7,
+  lat.ax.vals = NULL,
+  long.ax.vals = NULL,
   rotate = FALSE,
   size.outer = 1,
   plt.lat.axes = TRUE,
   plt.lat.labels = plt.lat.axes,
   plt.lon.axes = TRUE,
   plt.lon.labels = plt.lon.axes,
+  rotate.long.labels = TRUE,
   lat.ax.labs.pos = NULL,
   ax.labs.size = 4,
+  clip = "on",
   data.layer = NULL
 )
 }
@@ -52,12 +58,29 @@ ggpolar(
 
 \item{nearest.x.degrees}{round latitude tickmarks to how many degrees?}
 
+\item{f.long.label.ticks}{fraction of the plotted latitude axis range by
+which the longitude ticksmarks extend behind the outer latitude axis,
+i.e. the minimum (maximum) latitude for north (south) polar plots.}
+
+\item{f.long.label.pos}{fraction of the plotted latitude axis range by
+which the longitude labels are offset from the outer latitude axis.}
+
+\item{lat.ax.vals}{manually set the latitude axis values where to plot
+latitude labels and lines. This overrides the automatic setting by
+\code{n.lat.labels} and \code{x.nearest.degress}, while the default
+\code{NULL} means to use the automatic setting.}
+
+\item{long.ax.vals}{manually set the longitude axis values where to plot
+longitude labels and lines. This overrides the automatic setting by
+\code{longitude.spacing}, while the default \code{NULL} means to use the
+automatic setting.}
+
 \item{rotate}{logical; if plotting a segment of < 360 degrees longitude,
 rotate the plot so that north is up (or south is down) as seen from the
 mean longitude of the segment.}
 
-\item{size.outer}{size of the outer longitude circle and, if plotting a
-segment, of the outer latitude lines.}
+\item{size.outer}{size of the outer (and potential inner) longitude circle
+and, if plotting a segment, of the outer latitude lines.}
 
 \item{plt.lat.axes}{logical; shall latitude axes be plotted?}
 
@@ -69,12 +92,21 @@ set to the value of \code{plt.lat.axes}.}
 \item{plt.lon.labels}{logical; shall longitude labels be plotted? Per default
 set to the value of \code{plt.lon.axes}.}
 
+\item{rotate.long.labels}{logical; controls whether the longitude axis labels
+are rotated according to their value and the setting of \code{rotate} (the
+default) or not.}
+
 \item{lat.ax.labs.pos}{longitudinal positions of the latitude axis
 labels. Per default, the labels are placed at 0 E (180 W) for north (south)
 polar plots or at the mean longitude of a segment; use this parameter to
 override the default setting.}
 
 \item{ax.labs.size}{size of latitude and longitude axis labels.}
+
+\item{clip}{Should drawing be clipped to the extent of the plot panel? A
+setting of \code{"on"} (the default) means yes, and a setting of
+\code{"off"} means no. For details, please see
+\code{\link[ggplot2]{coord_cartesian}}.}
 
 \item{data.layer}{optional ggplot2 layer of data onto which the polar map
 shall be plotted. Defaults to \code{NULL} which only plots the map.}

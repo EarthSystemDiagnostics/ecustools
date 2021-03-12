@@ -4,7 +4,14 @@
 \alias{GetNetCDFAtCoords}
 \title{Extract timeseries for nearest coordinates from a netcdf file}
 \usage{
-GetNetCDFAtCoords(filename, req.coords, req.var, time.var = "time")
+GetNetCDFAtCoords(
+  filename,
+  req.coords,
+  req.var,
+  time.var = "time",
+  lon.var = "longitude",
+  lat.var = "latitude"
+)
 }
 \arguments{
 \item{filename}{Name of the netcdf file}
@@ -14,6 +21,9 @@ GetNetCDFAtCoords(filename, req.coords, req.var, time.var = "time")
 \item{req.var}{name of the variable to extract}
 
 \item{time.var}{name of the time variable}
+
+\item{lon.var, lat.var}{names of the longitude and latitude variables in the 
+netcdf file}
 }
 \value{
 

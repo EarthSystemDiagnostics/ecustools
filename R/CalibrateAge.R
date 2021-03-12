@@ -3,7 +3,7 @@
 #' @param df dataframe
 #' @param age.14C Name of column with 14C ages, Default: 'age.14C'
 #' @param age.14C.se Name of column with 1se 14C age uncertainty, Default: 'age.14C.se'
-#' @param curve Calibration curve, Default: 'intcal13'
+#' @param curve Calibration curve, Default: 'intcal20'
 #' @param return.type Return the ammended dataframe or additionally the list of PDFs, Default: 'df'
 #' @param offset Optional offset applied to all 14C ages, Default: 0
 #' @return A dataframe or list
@@ -36,10 +36,15 @@
 #' @rdname CalibrateAge
 #' @export
 #' @importFrom Bchron BchronCalibrate
-CalibrateAge <- function(df, age.14C = "age.14C", age.14C.se = "age.14C.se", curve = "intcal13", return.type = "df", offset = 0){
+CalibrateAge <- function(df, age.14C = "age.14C",
+                         age.14C.se = "age.14C.se",
+                         curve = "intcal20", 
+                         return.type = "df", offset = 0){
 
   return.type <- match.arg(return.type, choices = c("df", "lst"))
-  curve <- match.arg(curve, choices = c("intcal13", "shcal13", "marine13", "normal"))
+  curve <- match.arg(curve, choices = c("intcal13", "shcal13", "marine13",
+                                        "intcal20", "marine20", "shcal20",
+                                        "normal"))
 
   cal.ages <- lapply(1:nrow(df), function(x) {
     tryCatch(Bchron::BchronCalibrate(

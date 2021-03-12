@@ -14,22 +14,42 @@
 #'   "Black"); set to the same as \code{land.fill.colour} to hide them.
 #' @param n.lat.labels approximate number of latitude tickmarks.
 #' @param nearest.x.degrees round latitude tickmarks to how many degrees?
+#' @param f.long.label.ticks fraction of the plotted latitude axis range by
+#'   which the longitude ticksmarks extend behind the outer latitude axis,
+#'   i.e. the minimum (maximum) latitude for north (south) polar plots.
+#' @param f.long.label.pos fraction of the plotted latitude axis range by
+#'   which the longitude labels are offset from the outer latitude axis.
+#' @param lat.ax.vals manually set the latitude axis values where to plot
+#'   latitude labels and lines. This overrides the automatic setting by
+#'   \code{n.lat.labels} and \code{x.nearest.degress}, while the default
+#'   \code{NULL} means to use the automatic setting.
+#' @param long.ax.vals manually set the longitude axis values where to plot
+#'   longitude labels and lines. This overrides the automatic setting by
+#'   \code{longitude.spacing}, while the default \code{NULL} means to use the
+#'   automatic setting.
 #' @param rotate logical; if plotting a segment of < 360 degrees longitude,
 #'   rotate the plot so that north is up (or south is down) as seen from the
 #'   mean longitude of the segment.
-#' @param size.outer size of the outer longitude circle and, if plotting a
-#'   segment, of the outer latitude lines.
+#' @param size.outer size of the outer (and potential inner) longitude circle
+#'   and, if plotting a segment, of the outer latitude lines.
 #' @param plt.lat.axes logical; shall latitude axes be plotted?
 #' @param plt.lat.labels logical; shall latitude labels be plotted? Per default
 #'   set to the value of \code{plt.lat.axes}.
 #' @param plt.lon.axes logical; shall longitude axes be plotted?
 #' @param plt.lon.labels logical; shall longitude labels be plotted? Per default
 #'   set to the value of \code{plt.lon.axes}.
+#' @param rotate.long.labels logical; controls whether the longitude axis labels
+#'   are rotated according to their value and the setting of \code{rotate} (the
+#'   default) or not.
 #' @param lat.ax.labs.pos longitudinal positions of the latitude axis
 #'   labels. Per default, the labels are placed at 0 E (180 W) for north (south)
 #'   polar plots or at the mean longitude of a segment; use this parameter to
 #'   override the default setting.
 #' @param ax.labs.size size of latitude and longitude axis labels.
+#' @param clip Should drawing be clipped to the extent of the plot panel? A
+#'   setting of \code{"on"} (the default) means yes, and a setting of
+#'   \code{"off"} means no. For details, please see
+#'   \code{\link[ggplot2]{coord_cartesian}}.
 #' @param data.layer optional ggplot2 layer of data onto which the polar map
 #'   shall be plotted. Defaults to \code{NULL} which only plots the map.
 #' @import ggplot2 maptools rgeos
@@ -82,11 +102,14 @@ ggpolar <- function(pole = c("N", "S"),
                     longitude.spacing = 60,
                     land.fill.colour = "Grey",
                     country.outline.colour = "Black",
-                    n.lat.labels = 4, nearest.x.degrees = 5, rotate = FALSE,
-                    size.outer = 1,
+                    n.lat.labels = 4, nearest.x.degrees = 5,
+                    f.long.label.ticks = 20, f.long.label.pos = 7,
+                    lat.ax.vals = NULL, long.ax.vals = NULL,
+                    rotate = FALSE, size.outer = 1,
                     plt.lat.axes = TRUE, plt.lat.labels = plt.lat.axes,
                     plt.lon.axes = TRUE, plt.lon.labels = plt.lon.axes,
-                    lat.ax.labs.pos = NULL, ax.labs.size = 4,
+                    rotate.long.labels = TRUE,
+                    lat.ax.labs.pos = NULL, ax.labs.size = 4, clip = "on",
                     data.layer = NULL) {
 
   # force to repair invalid geometries
@@ -119,22 +142,28 @@ ggpolar <- function(pole = c("N", "S"),
   # Hemisphere specific values
   if (pole == "N") {
 
-    lat.ax.vals <- seq(min.lat + d.lat.ax.vals, max.lat, by = d.lat.ax.vals)
+    if (!length(lat.ax.vals)) {
+      lat.ax.vals <- seq(min.lat + d.lat.ax.vals, max.lat, by = d.lat.ax.vals)
+    }
 
     outer.lat.ax.val <- min.lat
-    long.lab.pos.1 <- outer.lat.ax.val - (lat.range / 20)
-    long.lab.pos.2 <- outer.lat.ax.val - (lat.range / 7)
+    inner.lat.ax.val <- ifelse(max.lat == 90, NA, max.lat)
+    long.lab.pos.1 <- outer.lat.ax.val - (lat.range / f.long.label.ticks)
+    long.lab.pos.2 <- outer.lat.ax.val - (lat.range / f.long.label.pos)
 
     long.line.strt <- max.lat
     long.line.end <- long.lab.pos.1
 
   } else if (pole == "S") {
 
-    lat.ax.vals <- seq(max.lat - d.lat.ax.vals, min.lat, by = -d.lat.ax.vals)
+    if (!length(lat.ax.vals)) {
+      lat.ax.vals <- seq(max.lat - d.lat.ax.vals, min.lat, by = -d.lat.ax.vals)
+    }
 
     outer.lat.ax.val <- max.lat
-    long.lab.pos.1 <- outer.lat.ax.val + (lat.range / 20)
-    long.lab.pos.2 <- outer.lat.ax.val + (lat.range / 7)
+    inner.lat.ax.val <- ifelse(min.lat == -90, NA, min.lat)
+    long.lab.pos.1 <- outer.lat.ax.val + (lat.range / f.long.label.ticks)
+    long.lab.pos.2 <- outer.lat.ax.val + (lat.range / f.long.label.pos)
 
     long.line.strt <- long.lab.pos.1
     long.line.end <- min.lat
@@ -145,7 +174,9 @@ ggpolar <- function(pole = c("N", "S"),
                         "°", ifelse(lat.ax.vals < 0, " S", " N"))
 
   # Define the x axes required
-  long.ax.vals <- seq(min.lon, max.lon, by = longitude.spacing)
+  if (!length(long.ax.vals)) {
+    long.ax.vals <- seq(min.lon, max.lon, by = longitude.spacing)
+  }
 
   if (!is.segment) {
     long.ax.vals <- long.ax.vals[long.ax.vals != -180]
@@ -159,14 +190,22 @@ ggpolar <- function(pole = c("N", "S"),
   lat.lines <- expand.grid(long = min.lon : max.lon, lat = lat.ax.vals)
 
   # Define rotation angle for longitude labels
-  if (pole == "N") {
+  if (rotate.long.labels) {
 
-    long.ax.lab.rotation <- long.ax.vals - 180 - rotate.to
-    if (is.segment) long.ax.lab.rotation <- long.ax.lab.rotation + 180
+    if (pole == "N") {
+
+      long.ax.lab.rotation <- long.ax.vals - 180 - rotate.to
+      if (is.segment) long.ax.lab.rotation <- long.ax.lab.rotation + 180
+
+    } else {
+
+      long.ax.lab.rotation <- -long.ax.vals + rotate.to
+    }
 
   } else {
 
-    long.ax.lab.rotation <- -long.ax.vals + rotate.to
+    long.ax.lab.rotation <- 0
+
   }
 
   # Get map outline and crop
@@ -200,7 +239,7 @@ ggpolar <- function(pole = c("N", "S"),
 
     coord_map("ortho",
               orientation = c(ifelse(pole == "N", 90, -90), rotate.to, 0),
-              xlim = c(min.lon, max.lon)
+              xlim = c(min.lon, max.lon), clip = clip
               ) +
 
     # Remove axes and labels
@@ -209,10 +248,16 @@ ggpolar <- function(pole = c("N", "S"),
 
     # Outer latitude axis
     geom_line(aes(y = outer.lat.ax.val, x = min.lon : max.lon),
-              size = size.outer, colour = "black") +
+              size = size.outer, colour = "black")
+
+    # Inner latitude axis
+    if (!is.na(inner.lat.ax.val)) {
+      p <- p + geom_line(aes(y = inner.lat.ax.val, x = min.lon : max.lon),
+                         size = size.outer, colour = "black")
+    }
 
     # Change theme to remove panel backgound
-    theme(panel.background = element_blank())
+    p <- p + theme(panel.background = element_blank())
 
   # Add axes and labels
 
