@@ -11,6 +11,7 @@
 #' @export
 #' @importFrom scales trans_new log_breaks
 reverselog_trans <- function(base = exp(1)) {
+  function_deprecated("grfxtools")
   trans <- function(x) -log(x, base)
   inv <- function(x) base^(-x)
   scales::trans_new(paste0("reverselog-", format(base)), trans, inv,
@@ -47,6 +48,7 @@ reverselog_trans <- function(base = exp(1)) {
 #'                                nrow = 2, ncol = 2)
 #' gg
 facet_wrap_paginate_auto <- function(ggplot.obj, facets, nrow, ncol) {
+  function_deprecated("grfxtools")
   built.plot <- ggplot_build(ggplot.obj)
 
   # Make robust to changes in built ggplot object stucture in dev vs. CRAN version

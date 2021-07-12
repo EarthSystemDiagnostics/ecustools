@@ -36,6 +36,7 @@
 #'
 #' hist(out$v - out$v_true)
 InterpBarycentric <- function(X, f, Xi) {
+  function_deprecated("geostools")
   X <- as.matrix(X)
   Xi <- as.matrix(Xi)
   dn <- geometry::delaunayn(X)

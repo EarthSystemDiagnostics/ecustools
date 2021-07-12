@@ -8,6 +8,7 @@
 #' hist(RWeights(100000, weights), breaks = 501)
 #' @export
 RWeights <- function(n = 1000, weights) {
+  function_deprecated("stattools")
   base::sample.int(length(weights),
     n,
     prob = weights,

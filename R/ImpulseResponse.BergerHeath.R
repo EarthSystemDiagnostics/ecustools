@@ -6,6 +6,7 @@
 #' @author Thomas Laepple
 #' @export
 ImpulseResponse.BergerHeath <- function(z, d, z0 = 0) {
+  function_deprecated("prxytools")
   x <- z0 + d - z
   epsilon <- x/d
   result <- 1/d * exp(-epsilon)

@@ -1,7 +1,7 @@
 Package: ecustools
 Title: A miscellaneous collection of R functions for working with time-series
     and paleo data.
-Version: 0.1
+Version: 0.1.9999
 Author:
   Andrew Dolman [aut, cre],
   Thomas Laepple [aut],
@@ -38,7 +38,8 @@ Imports:
     rgeos,
     mapproj,
     geosphere,
-    Bchron
+    Bchron,
+    rlang
 Remotes: 
     earthsystemdiagnostics/orbitalforcing,
     earthsystemdiagnostics/pfields

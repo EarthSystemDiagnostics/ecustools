@@ -52,7 +52,7 @@
 #' @export
 GetDistance <- function(lat0, lon0, lat, lon,
                         get.nearest = FALSE, verbose = FALSE) {
-
+  function_deprecated("geostools")
   # Error checking
 
   if (length(lat0) != length(lon0))

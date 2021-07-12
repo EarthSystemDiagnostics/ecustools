@@ -111,7 +111,7 @@ ggpolar <- function(pole = c("N", "S"),
                     rotate.long.labels = TRUE,
                     lat.ax.labs.pos = NULL, ax.labs.size = 4, clip = "on",
                     data.layer = NULL) {
-
+  function_deprecated("grfxtools")
   # force to repair invalid geometries
   rgeos::set_RGEOS_CheckValidity(2L)
 

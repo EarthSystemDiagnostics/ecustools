@@ -40,7 +40,7 @@ CalibrateAge <- function(df, age.14C = "age.14C",
                          age.14C.se = "age.14C.se",
                          curve = "intcal20", 
                          return.type = "df", offset = NULL){
-
+  function_deprecated("prxytools")
   return.type <- match.arg(return.type, choices = c("df", "lst"))
   curve <- match.arg(curve, choices = c("intcal13", "shcal13", "marine13",
                                         "intcal20", "marine20", "shcal20",

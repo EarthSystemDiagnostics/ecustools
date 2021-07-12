@@ -39,6 +39,7 @@ PlotPairwiseCorrelations <- function(M,
                                      axis.label = NULL,
                                      return.corr.tibble = FALSE,
                                      plotit = TRUE){
+  function_deprecated("grfxtools")
   if (is.null(colnames(M))) colnames(M) <- 1:ncol(M)
   c.m <- cor(M)
   c.m[lower.tri(c.m, diag = TRUE)] <- NA

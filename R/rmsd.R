@@ -15,7 +15,7 @@
 #' rmsd(v1, v2)
 #' @export
 rmsd <- function(v1, v2, na.rm = FALSE) {
-
+  function_deprecated("stattools")
   if (length(v1) != length(v2)) {
     stop("Arguments must have the same length.")
   }
