@@ -28,6 +28,7 @@ ReadCMIP5Ensemble <- function(path = "", bFullEnsemble = TRUE,
                               DATADIR = path, PREFIX = "tas_Amon_",
                               MIDDLE = "_historical_", SUFFIX = ".nc",
                               varname = "tas") {
+  stop("Package 'ecustools' and this function are deprecated!")
   b.meta <- read.table(METAFILE, header = FALSE)
   meta <- list(names = vector(), modelName = vector(), ensMember = vector())
   cdat <- list()

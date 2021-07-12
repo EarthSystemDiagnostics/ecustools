@@ -39,7 +39,7 @@ NULL
 #' @rdname SeasonalCycle
 #' @export
 dSeas <- function(x=NULL, mean.t, amp.t, sd.t, return = c("density", "FUN"), res = 0.01) {
-
+  function_deprecated("stattools")
   rng <- max(c(amp.t, sd.t * 5))
   lnth <- (2 * rng) / res
 
@@ -78,6 +78,7 @@ dSeas <- function(x=NULL, mean.t, amp.t, sd.t, return = c("density", "FUN"), res
 #' @param n number of samples
 #' @export
 rSeas <- function(n, mean.t, amp.t, sd.t){
+  function_deprecated("stattools")
   x <- runif(n, 0, 2*pi)
   y <- mean.t + sin(x) * amp.t/2
   z <- y + rnorm(n, 0, sd.t)
@@ -91,6 +92,7 @@ rSeas <- function(n, mean.t, amp.t, sd.t){
 #' @param amp.t amplitude of sine wave
 #' @export
 dSin <- function(x, mean.t, amp.t) {
+  function_deprecated("stattools")
   d <- rep(0, length(x))
 
   # Do not evaluate where known to be NaN

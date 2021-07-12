@@ -14,6 +14,7 @@
 ##' @export
 BarometricFormula <- function(T, h, p0 = 1013) {
 
+  function_deprecated("geostools")
     kR <- 8.314
     kg <- 9.807
     kM <- 0.02896
@@ -25,4 +26,3 @@ BarometricFormula <- function(T, h, p0 = 1013) {
     return(p0 * exp(-h / hs))
 
 }
-

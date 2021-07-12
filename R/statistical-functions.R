@@ -14,6 +14,7 @@
 #' 
 #' PopSD(1:10)
 PopSD <- function(x){
+  function_deprecated("stattools")
   n <- length(x)
   adj <- sqrt((n-1) / n)
   adj * sd(x)
@@ -46,6 +47,7 @@ PopSD <- function(x){
 #' @rdname SDofSD
 #' @export
 SDofSD <- function(s, n) {
+  function_deprecated("stattools")
   if (any(n < 2, na.rm = TRUE))
     warning("n must be greater than or equal to 2")
   if (any(s < 0, na.rm = TRUE))
@@ -106,6 +108,7 @@ SDofSD <- function(s, n) {
 #'  }
 #' }
 SDofNumDist <- function(x, d){
+  function_deprecated("stattools")
   d <- d / sum(d)
   sqrt(sum(d*x^2) - sum(d*x)^2)
 }
@@ -126,7 +129,7 @@ SDofNumDist <- function(x, d){
 #' df$p <- dnorm(df$x, 5, 2)
 #' SummariseEmpiricalPDF(df$x, df$p)
 SummariseEmpiricalPDF <- function(x, p){
-
+  function_deprecated("stattools")
   # Ensure x and p are sorted
   p <- p[order(x)]
   x <- sort(x)
@@ -188,7 +191,7 @@ SummariseEmpiricalPDF <- function(x, p){
 #'   facet_wrap(~n)
 #'   }
 ExpectedRange <- function(sd, n) {
-
+  function_deprecated("stattools")
   f <- function(x, n) n * x * pnorm(x)^(n - 1) * dnorm(x)
 
   exp.range <- 2 * sd * integrate(f, -Inf, Inf, n = n)$value

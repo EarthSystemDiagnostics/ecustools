@@ -24,6 +24,7 @@
 #' @examples
 #' d18OwFromSalinity(30)
 d18OwFromSalinity <- function(Salinity){
+  function_deprecated("prxytools")
   -19.264 + 0.558 * Salinity
 }
 
@@ -56,6 +57,7 @@ d18OwFromSalinity <- function(Salinity){
 #' @examples
 #'d18OcFromd18OwTemp(d18Ow = 0.6, 1:26)
 d18OcFromd18OwTemp <- function(d18Ow, Temp){
+  function_deprecated("prxytools")
   (d18Ow - 0.27) + (4.38 - (4.38^2 - 4 * 0.1 * (16.9 - Temp))^0.5) / (2 * 0.1)
 }
 
@@ -72,6 +74,7 @@ d18OcFromd18OwTemp <- function(d18Ow, Temp){
 #' @examples
 #' CalcifTemp(d18OcFromd18OwTemp(d18Ow = 0.6, 1:26), 0.6)
 CalcifTemp <- function(d18Oc, d18Ow){
+  function_deprecated("prxytools")
   16.9 - 4.38 * (d18Oc - (d18Ow - 0.27)) + 0.1 *
     (d18Oc - (d18Ow - 0.27))^2
 }

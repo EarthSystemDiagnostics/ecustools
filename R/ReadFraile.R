@@ -18,7 +18,7 @@
 #'                   varname = "var.name")
 #' }
 ReadFraile <- function(FILENAME, varname){
-
+  stop("Package 'ecustools' and this function are deprecated!")
   if (!requireNamespace("ncdf4", quietly = TRUE)) {
     stop("package 'ncdf4' is needed for this function to work. Please install it.
          Linux users may have to install the 3rd party libraries libnetcdf-dev

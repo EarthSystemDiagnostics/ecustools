@@ -19,7 +19,7 @@
 ##' lines(x, lwd = 2)
 ##' @export
 Polyplot <- function(x, y1, y2, col = "black", alpha = 0.2, ...) {
-
+  function_deprecated("grfxtools")
     inp <- list(x, y1, y2)
     if (var(sapply(inp, length)) != 0)
         stop("All input vectors must be of the same length.")

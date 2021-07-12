@@ -24,7 +24,7 @@
 CircleCoordinates <- function(lat0, lon0, radius.circle,
                               radius.sphere = 6357, n = 100,
                               return.pi.interval = FALSE) {
-
+  function_deprecated("geostools")
   # Put input longitude in [-pi, pi]
   if (lon0 >= 180) lon0 <- lon0 - 360
 

@@ -21,7 +21,7 @@
 #' }
 GetNetCDFAtCoords <- function(filename, req.coords, req.var, time.var = "time",
                               lon.var = "longitude", lat.var = "latitude"){
-  
+  function_deprecated("ncdftools")
   if (!requireNamespace("ncdf4", quietly = TRUE)) {
     stop("package 'ncdf4' is needed for this function to work. Please install it.
          Linux users may have to install the 3rd party libraries libnetcdf-dev
