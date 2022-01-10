@@ -25,6 +25,6 @@ function_deprecated <- function(successor, new.name = NULL) {
     sprintf("Please use %s::%s() from package '%s'.\n",
             successor, new.name, successor))
 
-  warning(msg, call. = FALSE)
+  stop(msg, call. = FALSE)
 
 }
